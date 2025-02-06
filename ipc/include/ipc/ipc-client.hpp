@@ -1,0 +1,43 @@
+#pragma once
+
+#include <string>
+#include <string_view>
+#include <unistd.h>
+
+
+class IpcClient
+{
+public:
+  using msgtype_t = __syscall_slong_t;
+
+public:
+  IpcClient(int projectId);
+
+  /**
+   * @brief Send request for message with name.
+   *
+   * @param name name that should be in the message
+   * @param wait wether to block when message queue is full or return false
+   *
+   * @return returns wether message was send when wait is false, otherwise always true
+   */
+  bool sendTestRequest(
+    std::string_view name,
+    bool wait = true
+  );
+
+  /**
+   * @brief Read response from message queue.
+   *
+   * @param oMessage output variable for msg field of response
+   * @param wait wether to block/wait for message or return immedeatly if queue is empty
+   */
+  void recieveTestResponse(
+    std::string &oMessage,
+    bool wait = true
+  );
+
+private:
+  int mMsgQueueId;
+  pid_t mPid;
+};

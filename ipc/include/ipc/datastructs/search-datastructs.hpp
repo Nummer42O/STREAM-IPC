@@ -2,10 +2,10 @@
 
 #include "ipc/common.hpp"
 
-struct SearchRequest {
+struct SearchData {
   enum Type {
     NODE,
     TOPIC
   } type;
-  char name[MAX_STRING_LENGTH];
+  std::string name;
 };

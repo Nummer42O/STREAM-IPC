@@ -2,8 +2,8 @@
 
 #include "ipc/common.hpp"
 
-struct NamespaceRequest {
+struct NamespaceData {
   requestId_t id;
-  char path[MAX_STRING_LENGTH];
+  std::string path;
   bool updates;
 };

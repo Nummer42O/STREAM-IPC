@@ -2,15 +2,15 @@
 
 #include "ipc/common.hpp"
 
-struct InitRequest {
+struct InitData {
   char ignoredTopic[MAX_STRING_LENGTH];
 };
 
-struct UnsubscribeRequest {
+struct UnsubscribeData {
   requestId_t id;
 };
 
-struct MsgRequest {
+struct MsgData {
   requestId_t id;
   primaryKey_t primaryKey;
   double targetFrequency;

@@ -83,7 +83,7 @@ ssize_t receiveMsg(
   long msgType,
   bool wait
 );
-#define DECLARE_TEMPLATE_receive_MSG(templateType) template ssize_t receiveMsg<templateType>(int, templateType &, long , bool)
+#define DECLARE_TEMPLATE_RECEIVE_MSG(templateType) template ssize_t receiveMsg<templateType>(int, templateType &, long , bool)
 
 /**
  * @brief Convert maybe null terminated character array of fixed size to std::string

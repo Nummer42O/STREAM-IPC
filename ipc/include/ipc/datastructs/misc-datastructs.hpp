@@ -2,16 +2,27 @@
 
 #include "ipc/common.hpp"
 
-struct InitData {
-  char ignoredTopic[MAX_STRING_LENGTH];
+struct InitDataRequest {
+  std::string ignoredTopic;
 };
 
-struct UnsubscribeData {
+struct UnsubscribeDataRequest {
   requestId_t id;
 };
 
-struct MsgData {
+struct MsgDataRequest {
   requestId_t id;
   primaryKey_t primaryKey;
   double targetFrequency;
+};
+
+struct InitDataResponse {
+  char ignoredTopics[MAX_ARRAY_LENGTH][MAX_STRING_LENGTH];
+};
+
+struct UnsubscribeDataResponse {
+};
+
+struct MsgDataResponse {
+  uint32_t shmlPtr;
 };

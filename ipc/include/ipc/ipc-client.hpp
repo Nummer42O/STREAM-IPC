@@ -6,9 +6,9 @@
 
 #include "ipc/common.hpp"
 #include "ipc/datastructs/information-datastructs.hpp"
-#include "ipc/datastructs/misc-datastructs.hpp"
 #include "ipc/datastructs/namespace-datastructs.hpp"
 #include "ipc/datastructs/search-datastructs.hpp"
+#include "ipc/datastructs/misc-datastructs.hpp"
 
 
 class IpcClient
@@ -37,6 +37,51 @@ public:
    */
   void receiveTestResponse(
     std::string &oMessage,
+    bool wait = true
+  );
+
+  bool sendNamespaceRequest(
+    NamespaceDataRequest payload,
+    bool wait = true
+  );
+
+  bool sendSearchRequest(
+    SearchDataRequest payload,
+    bool wait = true
+  );
+
+  bool sendMsgRequest(
+    MsgDataRequest payload,
+    bool wait = true
+  );
+
+  bool sendInitRequest(
+    InitDataRequest payload,
+    bool wait
+  );
+
+  bool sendUnsubscribeRequest(
+    UnsubscribeDataRequest payload,
+    bool wait = true
+  );
+
+  NamespaceDataResponse receiveNamespaceResponse(
+    bool wait = true
+  );
+
+  SearchDataResponse receiveSearchspaceResponse(
+    bool wait = true
+  );
+
+  MsgDataResponse receiveMsgResponse(
+    bool wait = true
+  );
+
+  InitDataResponse receiveInitResponse(
+    bool wait = true
+  );
+
+  UnsubscribeDataResponse receiveUnsubscribeResponse(
     bool wait = true
   );
 

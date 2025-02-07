@@ -65,8 +65,8 @@ ssize_t receiveMsg(int msgQueueId, T &payload, long msgType, bool wait)
 
   return nrBytes;
 }
-DECLARE_TEMPLATE_receive_MSG(TestRequest);
-DECLARE_TEMPLATE_receive_MSG(TestResponse);
+DECLARE_TEMPLATE_RECEIVE_MSG(TestRequest);
+DECLARE_TEMPLATE_RECEIVE_MSG(TestResponse);
 
 std::string to_string(const char *src, size_t size)
 {

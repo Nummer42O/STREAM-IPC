@@ -9,7 +9,7 @@ int main()
   IpcServer server(1);
 
   std::string input, output;
-  IpcServer::msgtype_t senderId;
+  IpcServer::msgKey_t senderId;
   while (true)
   {
     server.recieveTestRequest(input, senderId);

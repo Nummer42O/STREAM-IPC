@@ -32,7 +32,8 @@ bool IpcClient::sendTestRequest(std::string_view name, bool wait)
 void IpcClient::recieveTestResponse(std::string &oMessage, bool wait)
 {
   common::TestResponse response;
-  common::recieveMsg(mMsgQueueId, response, mPid, wait);
+  msgKey_t msgKey = common::makeMsgKey(mPid, 0); //! NOTE: would need appropriate value, in this example its not used
+  common::recieveMsg(mMsgQueueId, response, msgKey, wait);
 
   oMessage = common::to_string(response.msg, sizeof(common::TestResponse::msg));
 }

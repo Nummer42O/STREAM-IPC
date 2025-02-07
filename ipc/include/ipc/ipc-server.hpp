@@ -8,7 +8,7 @@
 class IpcServer
 {
 public:
-  using msgtype_t = __syscall_slong_t;
+  using msgKey_t = __syscall_slong_t;
 
 public:
   IpcServer(int projectId);
@@ -25,7 +25,7 @@ public:
    */
   bool sendTestResponse(
     std::string_view msg,
-    msgtype_t recieverId,
+    msgKey_t recieverId,
     bool wait = true
   );
 
@@ -38,7 +38,7 @@ public:
    */
   void recieveTestRequest(
     std::string &oName,
-    msgtype_t &oSenderId,
+    msgKey_t &oSenderId,
     bool wait = true
   );
 

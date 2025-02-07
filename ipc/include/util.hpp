@@ -3,15 +3,15 @@
 #include <iostream>
 #include <string>
 
+#include "ipc/common.hpp"
+
 
 #define KEY_LOCATION "/tmp/example.ipc-key"
 #define SERVER_MSG_TYPE 1l
 
 
-namespace common
+namespace util
 {
-using msgKey_t  = __syscall_slong_t;
-using msgType_t = int32_t;
 
 // REQUESTS/RESPONSES:
 

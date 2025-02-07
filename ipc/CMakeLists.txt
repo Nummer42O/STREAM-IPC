@@ -11,7 +11,7 @@ add_library(ipc_lib
     src/ipc-client.cpp
     src/ipc-exceptions.cpp
     src/ipc-server.cpp
-    src/common.cpp
+    src/util.cpp
 )
 target_include_directories(ipc_lib PRIVATE include)
 

@@ -4,12 +4,11 @@
 #include <string_view>
 #include <unistd.h>
 
+#include "ipc/common.hpp"
+
 
 class IpcClient
 {
-public:
-  using msgKey_t = __syscall_slong_t;
-
 public:
   IpcClient(int projectId);
 

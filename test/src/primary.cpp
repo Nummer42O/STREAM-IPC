@@ -1,4 +1,5 @@
 #include "ipc/ipc-server.hpp"
+#include "ipc/common.hpp"
 
 #include <iostream>
 #include <sstream>
@@ -9,7 +10,7 @@ int main()
   IpcServer server(1);
 
   std::string input, output;
-  IpcServer::msgKey_t senderId;
+  msgKey_t senderId;
   while (true)
   {
     server.recieveTestRequest(input, senderId);

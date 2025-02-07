@@ -5,11 +5,11 @@
 #include <sys/ipc.h>
 #include <sys/msg.h>
 
-#include "common.hpp"
+#include "util.hpp"
 #include "ipc/ipc-exceptions.hpp"
 
 
-namespace common {
+namespace util {
 
 int getMsgQueueId(int projectId, bool create)
 {

@@ -10,30 +10,30 @@ namespace fs = std::filesystem;
 
 #include "ipc/ipc-client.hpp"
 #include "ipc/ipc-exceptions.hpp"
-#include "common.hpp"
+#include "util.hpp"
 
 
 IpcClient::IpcClient(int projectId)
 {
-  mMsgQueueId = common::getMsgQueueId(projectId);
+  mMsgQueueId = util::getMsgQueueId(projectId);
   mPid = ::getpid();
 }
 
 bool IpcClient::sendTestRequest(std::string_view name, bool wait)
 {
-  common::TestRequest request{
+  util::TestRequest request{
     .senderId = mPid
   };
-  std::strncpy(request.name, name.cbegin(), sizeof(common::TestRequest::name));
+  std::strncpy(request.name, name.cbegin(), sizeof(util::TestRequest::name));
 
-  return common::sendMsg(mMsgQueueId, request, wait);
+  return util::sendMsg(mMsgQueueId, request, wait);
 }
 
 void IpcClient::recieveTestResponse(std::string &oMessage, bool wait)
 {
-  common::TestResponse response;
-  msgKey_t msgKey = common::makeMsgKey(mPid, 0); //! NOTE: would need appropriate value, in this example its not used
-  common::recieveMsg(mMsgQueueId, response, msgKey, wait);
+  util::TestResponse response;
+  msgKey_t msgKey = util::makeMsgKey(mPid, 0); //! NOTE: would need appropriate value, in this example its not used
+  util::recieveMsg(mMsgQueueId, response, msgKey, wait);
 
-  oMessage = common::to_string(response.msg, sizeof(common::TestResponse::msg));
+  oMessage = util::to_string(response.msg, sizeof(util::TestResponse::msg));
 }

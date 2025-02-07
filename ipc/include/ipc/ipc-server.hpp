@@ -21,14 +21,14 @@ public:
    * @brief Send response message back to requesting process.
    *
    * @param msg response message
-   * @param recieverId process id of the requesting process
+   * @param receiverId process id of the requesting process
    * @param wait wether to block when message queue is full or return false
    *
    * @return wether message was send when wait is false, otherwise always true
    */
   bool sendTestResponse(
     std::string_view msg,
-    msgKey_t recieverId,
+    msgKey_t receiverId,
     bool wait = true
   );
 
@@ -39,7 +39,7 @@ public:
    * @param oSenderId output variable for senderId field of request
    * @param wait wether to block/wait for message or return immedeatly if queue is empty
    */
-  void recieveTestRequest(
+  void receiveTestRequest(
     std::string &oName,
     msgKey_t &oSenderId,
     bool wait = true

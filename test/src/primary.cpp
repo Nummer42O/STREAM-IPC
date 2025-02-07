@@ -13,7 +13,7 @@ int main()
   msgKey_t senderId;
   while (true)
   {
-    server.recieveTestRequest(input, senderId);
+    server.receiveTestRequest(input, senderId);
 
     output = "Hello " + input + "!";
 

@@ -35,7 +35,7 @@ public:
    * @param oMessage output variable for msg field of response
    * @param wait wether to block/wait for message or return immedeatly if queue is empty
    */
-  void recieveTestResponse(
+  void receiveTestResponse(
     std::string &oMessage,
     bool wait = true
   );

@@ -53,7 +53,7 @@ DECLARE_TEMPLATE_SEND_MSG(TestRequest);
 DECLARE_TEMPLATE_SEND_MSG(TestResponse);
 
 template<typename T>
-ssize_t recieveMsg(int msgQueueId, T &payload, long msgType, bool wait)
+ssize_t receiveMsg(int msgQueueId, T &payload, long msgType, bool wait)
 {
   ssize_t nrBytes = ::msgrcv(
     msgQueueId,
@@ -65,8 +65,8 @@ ssize_t recieveMsg(int msgQueueId, T &payload, long msgType, bool wait)
 
   return nrBytes;
 }
-DECLARE_TEMPLATE_RECIEVE_MSG(TestRequest);
-DECLARE_TEMPLATE_RECIEVE_MSG(TestResponse);
+DECLARE_TEMPLATE_receive_MSG(TestRequest);
+DECLARE_TEMPLATE_receive_MSG(TestResponse);
 
 std::string to_string(const char *src, size_t size)
 {

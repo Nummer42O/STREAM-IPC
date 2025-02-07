@@ -65,25 +65,25 @@ bool sendMsg(
 #define DECLARE_TEMPLATE_SEND_MSG(templateType) template bool sendMsg<templateType>(int, const templateType &, bool)
 
 /**
- * @brief Recieve a request/response message.
+ * @brief receive a request/response message.
  *
  * @tparam T A request/response struct like {long id; ...}.
  * @param msgQueueId The ID of the msg queue on which should be communicated.
  * @param payload The output variable for the request/response.
- * @param msgType The type of message to recieve.
+ * @param msgType The type of message to receive.
  * @param wait Wether to block/wait for message or return immedeatly if queue is empty.
  *
  * @throw IpcException When recieving a message fails.
  * @return The number of bytes of payload (everything except the id) read from the message queue.
  */
 template<typename T>
-ssize_t recieveMsg(
+ssize_t receiveMsg(
   int msgQueueId,
   T &payload,
   long msgType,
   bool wait
 );
-#define DECLARE_TEMPLATE_RECIEVE_MSG(templateType) template ssize_t recieveMsg<templateType>(int, templateType &, long , bool)
+#define DECLARE_TEMPLATE_receive_MSG(templateType) template ssize_t receiveMsg<templateType>(int, templateType &, long , bool)
 
 /**
  * @brief Convert maybe null terminated character array of fixed size to std::string

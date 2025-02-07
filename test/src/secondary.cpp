@@ -19,7 +19,7 @@ int main()
       continue;
     }
 
-    client.recieveTestResponse(output);
-    std::cout << "Recieved message: \"" << output << "\"\n";
+    client.receiveTestResponse(output);
+    std::cout << "received message: \"" << output << "\"\n";
   }
 }

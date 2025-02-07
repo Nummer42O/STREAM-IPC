@@ -5,6 +5,10 @@
 #include <unistd.h>
 
 #include "ipc/common.hpp"
+#include "ipc/datastructs/information-datastructs.hpp"
+#include "ipc/datastructs/misc-datastructs.hpp"
+#include "ipc/datastructs/namespace-datastructs.hpp"
+#include "ipc/datastructs/search-datastructs.hpp"
 
 
 class IpcServer

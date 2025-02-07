@@ -8,6 +8,11 @@
 #include "util.hpp"
 #include "ipc/ipc-exceptions.hpp"
 
+#include "msgs/information-msgs.hpp"
+#include "msgs/namespace-msgs.hpp"
+#include "msgs/search-msgs.hpp"
+#include "msgs/misc-msgs.hpp"
+
 
 namespace util {
 

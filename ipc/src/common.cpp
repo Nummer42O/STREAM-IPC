@@ -31,7 +31,7 @@ bool sendMsg(int msgQueueId, const T &payload, bool wait)
 {
   int status = ::msgsnd(
     msgQueueId,
-    &payload, sizeof(T) - sizeof(msgtype_t),
+    &payload, sizeof(T) - sizeof(msgKey_t),
     wait ? 0 : IPC_NOWAIT
   );
   if (status == -1)
@@ -66,6 +66,14 @@ DECLARE_TEMPLATE_RECIEVE_MSG(TestResponse);
 std::string to_string(const char *src, size_t size)
 {
   return std::string(src, ::strnlen(src, size));
+}
+
+msgKey_t makeMsgKey(msgType_t msgType, pid_t pid)
+{
+  msgKey_t \
+    msb = (static_cast<msgKey_t>(msgType) << 32 & 0xFFFFFFFF00000000),
+    lsb = (static_cast<msgKey_t>(pid) & 0x00000000FFFFFFFF);
+  return msb | lsb;
 }
 
 }

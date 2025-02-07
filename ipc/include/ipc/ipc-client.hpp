@@ -8,7 +8,7 @@
 class IpcClient
 {
 public:
-  using msgtype_t = __syscall_slong_t;
+  using msgKey_t = __syscall_slong_t;
 
 public:
   IpcClient(int projectId);

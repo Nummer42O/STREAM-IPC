@@ -28,17 +28,17 @@ IpcServer::~IpcServer()
       << " closing message queue: " << strerrordesc_np(errno) << '\n';
 }
 
-bool IpcServer::sendTestResponse(std::string_view msg, msgtype_t recieverId, bool wait)
+bool IpcServer::sendTestResponse(std::string_view msg, msgKey_t recieverId, bool wait)
 {
   common::TestResponse response{
-    .type = recieverId
+    .type = common::makeMsgKey(recieverId, 0) //! NOTE: would need appropriate value, in this example its not used
   };
   std::strncpy(response.msg, msg.cbegin(), sizeof(common::TestResponse::msg));
 
   return common::sendMsg(mMsgQueueId, response, wait);
 }
 
-void IpcServer::recieveTestRequest(std::string &oName, msgtype_t &oSenderId, bool wait)
+void IpcServer::recieveTestRequest(std::string &oName, msgKey_t &oSenderId, bool wait)
 {
   common::TestRequest request;
   common::recieveMsg(mMsgQueueId, request, SERVER_MSG_TYPE, wait);

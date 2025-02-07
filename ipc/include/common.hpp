@@ -10,20 +10,21 @@
 
 namespace common
 {
-using msgtype_t = __syscall_slong_t;
+using msgKey_t  = __syscall_slong_t;
+using msgType_t = int32_t;
 
 // REQUESTS/RESPONSES:
 
 struct TestRequest
 {
-  msgtype_t type = SERVER_MSG_TYPE;
+  msgKey_t type = SERVER_MSG_TYPE;
   pid_t senderId;
   char name[32];
 };
 
 struct TestResponse
 {
-  msgtype_t type;
+  msgKey_t type;
   char msg[64];
 };
 
@@ -95,6 +96,19 @@ ssize_t recieveMsg(
 std::string to_string(
   const char *src,
   size_t size
+);
+
+/**
+ * @brief Encode combine PID and msg type into one key value for msg_typ to enable identifying request types per application.
+ *
+ * @param msgType Identifier for the type of request/response.
+ * @param pid PID of calling/receiving process.
+ *
+ * @return Key with MSB = msgType & LSB = PID.
+ */
+msgKey_t makeMsgKey(
+  msgType_t msgType,
+  pid_t pid
 );
 
 }

@@ -39,5 +39,5 @@ struct AckResponse {
 };
 #define ACK_RESPONSE_MSG_TYPE __COUNTER__
 
-using UnsubscribeResponse = Ack;
+using UnsubscribeResponse = AckResponse;
 #define UNSUBSCRIBE_RESPONSE_MSG_TYPE ACK_RESPONSE_MSG_TYPE

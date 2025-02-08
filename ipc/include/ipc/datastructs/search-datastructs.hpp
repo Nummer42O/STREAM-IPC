@@ -11,9 +11,5 @@ struct SearchDataRequest {
 };
 
 struct SearchDataResponse {
-  enum Type : uint8_t {
-    NODE,
-    TOPIC
-  } type;
-  std::string name;
+  primaryKey_t primaryKey;
 };

@@ -36,7 +36,7 @@ bool IpcClient::sendTestRequest(std::string_view name, bool wait)
 void IpcClient::receiveTestResponse(std::string &oMessage, bool wait)
 {
   util::TestResponse response;
-  msgKey_t msgKey = util::makeMsgKey(mPid, 0);
+  msgKey_t msgKey = util::makeMsgKey(0, mPid);
   util::receiveMsg(mMsgQueueId, response, msgKey, wait);
 
   oMessage = util::to_string(response.msg, sizeof(util::TestResponse::msg));
@@ -47,7 +47,7 @@ bool IpcClient::sendNamespaceRequest(NamespaceDataRequest payload, bool wait) {
 
   NamespaceRequest request {
     .key = key,
-    .id = mPid,
+    .id = payload.id,
     .updates = payload.updates
   };
   std::strncpy(request.path, payload.path.c_str(), MAX_STRING_LENGTH);
@@ -72,6 +72,7 @@ bool IpcClient::sendMsgRequest(MsgDataRequest payload, bool wait) {
 
   MsgRequest request {
     .key = key,
+    .id = payload.id,
     .primaryKey = payload.primaryKey,
     .targetFrequency = payload.targetFrequency
   };
@@ -101,22 +102,14 @@ bool IpcClient::sendUnsubscribeRequest(UnsubscribeDataRequest payload, bool wait
   return util::sendMsg(mMsgQueueId, request, wait);
 }
 
-void IpcClient::receiveTestResponse(std::string &oMessage, bool wait)
-{
-  util::TestResponse response;
-  msgKey_t msgKey = util::makeMsgKey(0, mPid);
-  util::receiveMsg(mMsgQueueId, response, msgKey, wait);
-
-  oMessage = util::to_string(response.msg, sizeof(util::TestResponse::msg));
-}
-
 NamespaceDataResponse IpcClient::receiveNamespaceResponse(bool wait) {
   NamespaceResponse response;
   msgKey_t msgKey = util::makeMsgKey(NAMESPACE_REQUEST_MSG_TYPE, mPid);
   util::receiveMsg(mMsgQueueId, response, msgKey, wait);
 
   return NamespaceDataResponse {
-    TODO
+    .nrOfAccChildren = response.nrOfAccChildren,
+    .children = util::parseStringArray(response.children)
   };
 }
 
@@ -126,7 +119,7 @@ SearchDataResponse IpcClient::receiveSearchspaceResponse(bool wait) {
   util::receiveMsg(mMsgQueueId, response, msgKey, wait);
 
   return SearchDataResponse {
-    TODO
+    .primaryKey = response.primaryKey
   };
 }
 
@@ -136,7 +129,7 @@ MsgDataResponse IpcClient::receiveMsgResponse(bool wait) {
   util::receiveMsg(mMsgQueueId, response, msgKey, wait);
 
   return MsgDataResponse {
-    TODO
+    .shmlPtr = response.shmlPtr
   };
 }
 
@@ -146,7 +139,7 @@ InitDataResponse IpcClient::receiveInitResponse(bool wait) {
   util::receiveMsg(mMsgQueueId, response, msgKey, wait);
 
   return InitDataResponse {
-    TODO
+    .ignoredTopics = util::parseStringArray(response.ignoredTopics)
   };
 }
 
@@ -155,7 +148,5 @@ UnsubscribeDataResponse IpcClient::receiveUnsubscribeResponse(bool wait) {
   msgKey_t msgKey = util::makeMsgKey(UNSUBSCRIBE_REQUEST_MSG_TYPE, mPid);
   util::receiveMsg(mMsgQueueId, response, msgKey, wait);
 
-  return UnsubscribeDataRequest {
-    TODO
-  };
+  return UnsubscribeDataResponse {};
 }

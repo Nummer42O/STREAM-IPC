@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "ipc/common.hpp"
 
@@ -109,6 +110,19 @@ std::string to_string(
 msgKey_t makeMsgKey(
   msgType_t msgType,
   pid_t pid
+);
+
+/**
+ * @brief Convert a C array of C strings into C++. The strings and array may be null terminated or reach their max size.
+ *
+ * @param src Pointer to initial element of source string array.
+ * @param arraySize Size of the source array.
+ * @param stringSize Size of the strings in the array.
+ *
+ * @return Converted vector of strings.
+ */
+std::vector<std::string> parseStringArray(
+  const char src[MAX_ARRAY_LENGTH][MAX_STRING_LENGTH]
 );
 
 }

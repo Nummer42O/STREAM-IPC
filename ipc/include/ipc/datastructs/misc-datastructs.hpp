@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "ipc/common.hpp"
 
 struct InitDataRequest {
@@ -17,12 +19,13 @@ struct MsgDataRequest {
 };
 
 struct InitDataResponse {
-  char ignoredTopics[MAX_ARRAY_LENGTH][MAX_STRING_LENGTH];
-};
-
-struct UnsubscribeDataResponse {
+  std::vector<std::string> ignoredTopics[MAX_ARRAY_LENGTH];
 };
 
 struct MsgDataResponse {
   uint32_t shmlPtr;
 };
+
+struct AckDataResponse {};
+
+using UnsubscribeDataResponse = AckDataResponse;

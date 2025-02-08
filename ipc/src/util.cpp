@@ -82,3 +82,14 @@ msgKey_t makeMsgKey(msgType_t msgType, pid_t pid)
 }
 
 }
+
+std::vector<std::string> parseStringArray(const char src[MAX_ARRAY_LENGTH][MAX_STRING_LENGTH])
+{
+  std::vector<std::string> output(MAX_ARRAY_LENGTH);
+  for (size_t i = 0ul; i < MAX_ARRAY_LENGTH && src[i][0] != '\0'; i++)
+  {
+    output.push_back(util::to_string(src[i], MAX_STRING_LENGTH));
+  }
+
+  return output;
+}

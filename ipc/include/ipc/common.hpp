@@ -1,6 +1,7 @@
 #pragma once
 
 #include <sys/types.h>
+#include <cstdint>
 
 #define MAX_STRING_LENGTH 64
 #define MAX_ARRAY_LENGTH 16

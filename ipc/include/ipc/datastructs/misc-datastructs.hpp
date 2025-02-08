@@ -19,7 +19,7 @@ struct MsgDataRequest {
 };
 
 struct InitDataResponse {
-  std::vector<std::string> ignoredTopics[MAX_ARRAY_LENGTH];
+  std::vector<std::string> ignoredTopics;
 };
 
 struct MsgDataResponse {

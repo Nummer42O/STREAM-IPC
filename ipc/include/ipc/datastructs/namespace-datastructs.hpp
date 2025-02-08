@@ -12,5 +12,5 @@ struct NamespaceDataRequest {
 
 struct NamespaceDataResponse {
   uint32_t nrOfAccChildren;
-  std::vector<std::string> children[MAX_ARRAY_LENGTH];
+  std::vector<std::string> children;
 };

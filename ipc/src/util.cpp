@@ -93,3 +93,11 @@ std::vector<std::string> parseStringArray(const char src[MAX_ARRAY_LENGTH][MAX_S
 
   return output;
 }
+
+void parseVectorToStringArray(const std::vector<std::string> &children, char (&output)[MAX_ARRAY_LENGTH][MAX_STRING_LENGTH]) {
+  for (int i = 0; i < children.size(); i++) {
+    if (i >= MAX_ARRAY_LENGTH) { return; } // some kind of output to mention missed information would be great
+
+    strncpy(output[i], children[i].c_str(), MAX_STRING_LENGTH);
+  }
+}

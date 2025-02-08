@@ -125,4 +125,10 @@ std::vector<std::string> parseStringArray(
   const char src[MAX_ARRAY_LENGTH][MAX_STRING_LENGTH]
 );
 
+void parseVectorToStringArray(
+  const std::vector<std::string> &children,
+  char (&output)[MAX_ARRAY_LENGTH][MAX_STRING_LENGTH]
+);
+
+
 }

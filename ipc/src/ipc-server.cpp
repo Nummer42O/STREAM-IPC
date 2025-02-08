@@ -101,47 +101,44 @@ UnsubscribeDataRequest IpcServer::receiveUnsubscribeRequest(bool wait) {
   };
 }
 
-bool IpcServer::sendNamespaceResponse(NamespaceDataResponse response, msgKey_t receiverId, bool wait) {
+bool IpcServer::sendNamespaceResponse(NamespaceDataResponse payload, msgKey_t receiverId, bool wait) {
   NamespaceResponse msg{
     .key = receiverId,
-    .nrOfAccChildren = response.nrOfAccChildren
+    .nrOfAccChildren = payload.nrOfAccChildren
   };
-  util::parseVectorToStringArray(response.children, msg.children);
+  util::parseVectorToStringArray(payload.children, msg.children);
 
   return util::sendMsg(mMsgQueueId, msg, wait);
 }
 
-bool IpcServer::sendSearchResponse(SearchDataResponse response, msgKey_t receiverId, bool wait) {
+bool IpcServer::sendSearchResponse(SearchDataResponse payload, msgKey_t receiverId, bool wait) {
   SearchResponse msg{
     .key = receiverId,
-    .primaryKey = response.primaryKey
+    .primaryKey = payload.primaryKey
   };
 
   return util::sendMsg(mMsgQueueId, msg, wait);
 }
 
-bool IpcServer::sendMsgResponse(MsgDataResponse response, msgKey_t receiverId, bool wait) {
+bool IpcServer::sendMsgResponse(MsgDataResponse payload, msgKey_t receiverId, bool wait) {
   MsgResponse msg{
     .key = receiverId,
-    .shmlPtr = response.shmlPtr
+    .shmlPtr = payload.shmlPtr
   };
 
   return util::sendMsg(mMsgQueueId, msg, wait);
 }
 
-bool IpcServer::sendInitResponse(InitDataResponse response, msgKey_t receiverId, bool wait) {
-  InitResponse msg{
-    .key = receiverId,
-  };
-  util::parseVectorToStringArray(response.ignoredTopics, msg.ignoredTopics);
-
-  return util::sendMsg(mMsgQueueId, msg, wait);
+bool IpcServer::sendInitResponse(msgKey_t receiverId, bool wait) {
+  return sendAckResponse(receiverId, wait);
 }
 
 bool IpcServer::sendUnsubscribeResponse(msgKey_t receiverId, bool wait) {
-  UnsubscribeResponse msg{
-    .key = receiverId
-  };
+  return sendAckResponse(receiverId, wait);
+}
+
+bool IpcServer::sendAckResponse(msgKey_t receiverId, bool wait) {
+  AckResponse msg;
 
   return util::sendMsg(mMsgQueueId, msg, wait);
 }

@@ -125,10 +125,15 @@ std::vector<std::string> parseStringArray(
   const char src[MAX_ARRAY_LENGTH][MAX_STRING_LENGTH]
 );
 
+/**
+ * @brief Convert a vector with strings to C array of C strings.
+ *
+ * @param src Vector of strings.
+ * @param dest C array of C strings.
+ */
 void parseVectorToStringArray(
-  const std::vector<std::string> &children,
-  char (&output)[MAX_ARRAY_LENGTH][MAX_STRING_LENGTH]
+  const std::vector<std::string> &src,
+  char (&dest)[MAX_ARRAY_LENGTH][MAX_STRING_LENGTH]
 );
-
 
 }

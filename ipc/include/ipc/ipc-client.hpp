@@ -40,47 +40,112 @@ public:
     bool wait = true
   );
 
+  /**
+   * @brief Send request for Namespace children.
+   *
+   * @param payload analyzed namespace
+   * @param wait wether to block when message queue is full or return false
+   *
+   * @return returns wether message was send when wait is false, otherwise always true
+   */
   bool sendNamespaceRequest(
     NamespaceDataRequest payload,
     bool wait = true
   );
 
+  /**
+   * @brief Send request for primary-key of node or topic.
+   *
+   * @param payload whether to search for nodes or topics and name to search for
+   * @param wait wether to block when message queue is full or return false
+   *
+   * @return returns wether message was send when wait is false, otherwise always true
+   */
   bool sendSearchRequest(
     SearchDataRequest payload,
     bool wait = true
   );
 
+  /**
+   * @brief Send request for continuous message flow.
+   *
+   * @param payload topic (its primary-key) to get messages from with a given target frequency
+   * @param wait wether to block when message queue is full or return false
+   *
+   * @return returns wether message was send when wait is false, otherwise always true
+   */
   bool sendMsgRequest(
     MsgDataRequest payload,
     bool wait = true
   );
 
+  /**
+   * @brief Send request for initialising filters.
+   *
+   * @param payload entitities that should be ignored
+   * @param wait wether to block when message queue is full or return false
+   *
+   * @return returns wether message was send when wait is false, otherwise always true
+   */
   bool sendInitRequest(
     InitDataRequest payload,
     bool wait
   );
 
+  /**
+   * @brief Send request for unsubscribing message.
+   *
+   * @param payload request (by its id) that shall be disabled
+   * @param wait wether to block when message queue is full or return false
+   *
+   * @return returns wether message was send when wait is false, otherwise always true
+   */
   bool sendUnsubscribeRequest(
     UnsubscribeDataRequest payload,
     bool wait = true
   );
 
+  /**
+   * @brief Read NamespaceResponse from message queue.
+   *
+   * @param wait wether to block/wait for message or return immedeatly if queue is empty
+   */
   NamespaceDataResponse receiveNamespaceResponse(
     bool wait = true
   );
 
-  SearchDataResponse receiveSearchspaceResponse(
+  /**
+   * @brief Read SearchResponse from message queue.
+   *
+   * @param wait wether to block/wait for message or return immedeatly if queue is empty
+   */
+  SearchDataResponse receiveSearchResponse(
     bool wait = true
   );
 
+  /**
+   * @brief Read MsgResponse from message queue.
+   *
+   * @param wait wether to block/wait for message or return immedeatly if queue is empty
+   */
   MsgDataResponse receiveMsgResponse(
     bool wait = true
   );
 
+  /**
+   * @brief Read InitResponse from message queue.
+   *
+   * @param wait wether to block/wait for message or return immedeatly if queue is empty
+   */
   InitDataResponse receiveInitResponse(
     bool wait = true
   );
 
+  /**
+   * @brief Read UnsubscribResponse from message queue.
+   *
+   * @param wait wether to block/wait for message or return immedeatly if queue is empty
+   */
   UnsubscribeDataResponse receiveUnsubscribeResponse(
     bool wait = true
   );

@@ -113,7 +113,7 @@ NamespaceDataResponse IpcClient::receiveNamespaceResponse(bool wait) {
   };
 }
 
-SearchDataResponse IpcClient::receiveSearchspaceResponse(bool wait) {
+SearchDataResponse IpcClient::receiveSearchResponse(bool wait) {
   SearchResponse response;
   msgKey_t msgKey = util::makeMsgKey(SEARCH_REQUEST_MSG_TYPE, mPid);
   util::receiveMsg(mMsgQueueId, response, msgKey, wait);

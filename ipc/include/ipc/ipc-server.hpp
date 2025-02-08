@@ -45,51 +45,141 @@ public:
     bool wait = true
   );
 
+  /**
+   * @brief Read NamespaceRequests from message queue.
+   *
+   * @param wait wether to block/wait for message or return immedeatly if queue is empty
+   * 
+   * @return request
+   */
   NamespaceDataRequest receiveNamespaceRequest(
     bool wait = true
   );
 
+  /**
+   * @brief Read SearchRequest from message queue.
+   *
+   * @param wait wether to block/wait for message or return immedeatly if queue is empty
+   * 
+   * @return request
+   */
   SearchDataRequest receiveSearchRequest(
     bool wait = true
   );
 
+  /**
+   * @brief Read MsgRequest from message queue.
+   *
+   * @param wait wether to block/wait for message or return immedeatly if queue is empty
+   * 
+   * @return request
+   */
   MsgDataRequest receiveMsgRequest(
     bool wait = true
   );
 
+  /**
+   * @brief Read InitRequest from message queue.
+   *
+   * @param wait wether to block/wait for message or return immedeatly if queue is empty
+   * 
+   * @return request
+   */
   InitDataRequest receiveInitRequest(
     bool wait = true
   );
 
+  /**
+   * @brief Read UnsubscribeRequest from message queue.
+   *
+   * @param wait wether to block/wait for message or return immedeatly if queue is empty
+   * 
+   * @return request
+   */
   UnsubscribeDataRequest receiveUnsubscribeRequest(
     bool wait = true
   );
 
+  /**
+   * @brief Write NamespaceResponse to message queue.
+   *
+   * @param payload information about Namespace
+   * @param receiverId process id of the requesting process
+   * @param wait wether to block when message queue is full or return false
+   * 
+   * @return request
+   */
   bool sendNamespaceResponse(
-    NamespaceDataResponse response,
+    NamespaceDataResponse payload,
     msgKey_t receiverId,
     bool wait = true
   );
 
+  /**
+   * @brief Write SearchResponse to message queue.
+   *
+   * @param payload information about requested Object
+   * @param receiverId process id of the requesting process
+   * @param wait wether to block when message queue is full or return false
+   * 
+   * @return request
+   */
   bool sendSearchResponse(
-    SearchDataResponse response,
+    SearchDataResponse payload,
     msgKey_t receiverId,
     bool wait = true
   );
 
+  /**
+   * @brief Write MsgResponse to message queue.
+   *
+   * @param payload pointer to shared memory location
+   * @param receiverId process id of the requesting process
+   * @param wait wether to block when message queue is full or return false
+   * 
+   * @return request
+   */
   bool sendMsgResponse(
-    MsgDataResponse response,
+    MsgDataResponse payload,
     msgKey_t receiverId,
     bool wait = true
   );
 
+  /**
+   * @brief write Acknowledge for InitRequest to message queue.
+   *
+   * @param receiverId process id of the requesting process
+   * @param wait wether to block when message queue is full or return false
+   * 
+   * @return request
+   */
   bool sendInitResponse(
-    InitDataResponse response,
     msgKey_t receiverId,
     bool wait = true
   );
 
+  /**
+   * @brief write Acknowledge for UnsubscribeRequest to message queue.
+   *
+   * @param receiverId process id of the requesting process
+   * @param wait wether to block when message queue is full or return false
+   * 
+   * @return request
+   */
   bool sendUnsubscribeResponse(
+    msgKey_t receiverId,
+    bool wait = true
+  );
+
+  /**
+   * @brief write Acknowledge for UnsubscribeRequest to message queue.
+   *
+   * @param receiverId process id of the requesting process
+   * @param wait wether to block when message queue is full or return false
+   * 
+   * @return request
+   */
+  bool sendAckResponse(
     msgKey_t receiverId,
     bool wait = true
   );

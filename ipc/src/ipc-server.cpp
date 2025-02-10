@@ -10,6 +10,31 @@ namespace fs = std::filesystem;
 #include "ipc/ipc-server.hpp"
 #include "util.hpp"
 
+#define FN_SEND_RESPONSE(ResponseType, MsgTypeNr)               \
+  bool IpcServer::send##ResponseType(                           \
+    const ResponseType &response, pid_t receiverId, bool wait)  \
+  {                                                             \
+    util::ResponseMsg<ResponseType> msg{                        \
+      .key = util::makeMsgKey(MsgTypeNr, receiverId),           \
+      .payload = response                                       \
+    };                                                          \
+                                                                \
+    return util::sendMsg(mMsgQueueId, msg, wait);               \
+  }
+
+#define FN_RECEIVE_REQUEST(RequestType, MsgTypeNr)              \
+  RequestType IpcServer::receive##RequestType(                  \
+    requestId_t &oRequestId, pid_t &oSenderId, bool wait)       \
+  {                                                             \
+    util::RequestMsg<RequestType> msg;                          \
+    msgKey_t msgKey = util::makeMsgKey(MsgTypeNr);              \
+    util::receiveMsg(mMsgQueueId, msg, msgKey, wait);           \
+                                                                \
+    oRequestId = msg.requestId;                                 \
+    oSenderId = msg.senderId;                                   \
+    return msg.payload;                                         \
+  }
+
 
 IpcServer::IpcServer(int projectId)
 {
@@ -28,21 +53,20 @@ IpcServer::~IpcServer()
       << " closing message queue: " << strerrordesc_np(errno) << '\n';
 }
 
-bool IpcServer::sendTestResponse(std::string_view msg, msgKey_t receiverId, bool wait)
-{
-  util::TestResponse response{
-    .type = util::makeMsgKey(receiverId, 0) //! NOTE: would need appropriate value, in this example its not used
-  };
-  std::strncpy(response.msg, msg.cbegin(), sizeof(util::TestResponse::msg));
 
-  return util::sendMsg(mMsgQueueId, response, wait);
-}
+FN_SEND_RESPONSE(NodeRequest, MSG_TYPE_NODE_REQUEST);
+FN_RECEIVE_REQUEST(NodeResponse, MSG_TYPE_NODE_RESPONSE);
+FN_RECEIVE_REQUEST(NodeAliveUpdate, MSG_TYPE_NODE_ALIVE_UPDATE);
+FN_RECEIVE_REQUEST(NodePublishesToUpdate, MSG_TYPE_NODE_PUBLISHES_TO_UPDATE);
+FN_RECEIVE_REQUEST(NodeSubscribesToUpdate, MSG_TYPE_NODE_SUBSCRIBES_TO_UPDATE);
+FN_RECEIVE_REQUEST(NodeServicesUpdate, MSG_TYPE_NODE_SERVICES_UPDATE);
+FN_RECEIVE_REQUEST(NodeClientsUpdate, MSG_TYPE_NODE_CLIENTS_UPDATE);
 
-void IpcServer::receiveTestRequest(std::string &oName, msgKey_t &oSenderId, bool wait)
-{
-  util::TestRequest request;
-  util::receiveMsg(mMsgQueueId, request, SERVER_MSG_TYPE, wait);
+FN_SEND_RESPONSE(TopicRequest, MSG_TYPE_TOPIC_REQUEST);
+FN_RECEIVE_REQUEST(TopicResponse, MSG_TYPE_TOPIC_RESPONSE);
+FN_RECEIVE_REQUEST(TopicPublishersUpdate, MSG_TYPE_TOPIC_PUBLISHERS_UPDATE);
+FN_RECEIVE_REQUEST(TopicSubscribersUpdate, MSG_TYPE_TOPIC_SUBSCRIBERS_UPDATE);
 
-  oName = util::to_string(request.name, sizeof(util::TestRequest::name));
-  oSenderId = request.senderId;
-}
+FN_SEND_RESPONSE(ProcessRequest, MSG_TYPE_PROCESS_REQUEST);
+FN_RECEIVE_REQUEST(ProcessResponse, MSG_TYPE_PROCESS_RESPONSE);
+FN_RECEIVE_REQUEST(ProcessChildrenUpdate, MSG_TYPE_PROCESS_CHILDREN_UPDATE);

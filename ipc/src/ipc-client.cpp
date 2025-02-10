@@ -12,28 +12,54 @@ namespace fs = std::filesystem;
 #include "ipc/ipc-exceptions.hpp"
 #include "util.hpp"
 
+#define FN_SEND_REQUEST(RequestType, MsgTypeNr)             \
+  bool IpcClient::send##RequestType(                        \
+    const RequestType &request, requestId_t &oRequestId,    \
+    bool wait)                                              \
+  {                                                         \
+    oRequestId = ++mRequestIdCounter;                       \
+    util::RequestMsg<RequestType> msg{                      \
+      .key = util::makeMsgKey(MsgTypeNr),                   \
+      .requestId = oRequestId,                              \
+      .senderId = mPid,                                     \
+      .payload = request                                    \
+    };                                                      \
+                                                            \
+    return util::sendMsg(mMsgQueueId, msg, wait);           \
+  }
+
+#define FN_RECEIVE_RESPONSE(ResponseType, MsgTypeNr)        \
+  ResponseType IpcClient::receive##ResponseType(bool wait)  \
+  {                                                         \
+    util::ResponseMsg<ResponseType> msg;                    \
+    msgKey_t msgKey = util::makeMsgKey(MsgTypeNr, mPid);    \
+    util::receiveMsg(mMsgQueueId, msg, msgKey, wait);       \
+                                                            \
+    return msg.payload;                                     \
+  }
+
 
 IpcClient::IpcClient(int projectId)
 {
+  mRequestIdCounter = 0;
   mMsgQueueId = util::getMsgQueueId(projectId);
   mPid = ::getpid();
 }
 
-bool IpcClient::sendTestRequest(std::string_view name, bool wait)
-{
-  util::TestRequest request{
-    .senderId = mPid
-  };
-  std::strncpy(request.name, name.cbegin(), sizeof(util::TestRequest::name));
 
-  return util::sendMsg(mMsgQueueId, request, wait);
-}
+FN_SEND_REQUEST(NodeRequest, MSG_TYPE_NODE_REQUEST);
+FN_RECEIVE_RESPONSE(NodeResponse, MSG_TYPE_NODE_RESPONSE);
+FN_RECEIVE_RESPONSE(NodeAliveUpdate, MSG_TYPE_NODE_ALIVE_UPDATE);
+FN_RECEIVE_RESPONSE(NodePublishesToUpdate, MSG_TYPE_NODE_PUBLISHES_TO_UPDATE);
+FN_RECEIVE_RESPONSE(NodeSubscribesToUpdate, MSG_TYPE_NODE_SUBSCRIBES_TO_UPDATE);
+FN_RECEIVE_RESPONSE(NodeServicesUpdate, MSG_TYPE_NODE_SERVICES_UPDATE);
+FN_RECEIVE_RESPONSE(NodeClientsUpdate, MSG_TYPE_NODE_CLIENTS_UPDATE);
 
-void IpcClient::receiveTestResponse(std::string &oMessage, bool wait)
-{
-  util::TestResponse response;
-  msgKey_t msgKey = util::makeMsgKey(mPid, 0); //! NOTE: would need appropriate value, in this example its not used
-  util::receiveMsg(mMsgQueueId, response, msgKey, wait);
+FN_SEND_REQUEST(TopicRequest, MSG_TYPE_TOPIC_REQUEST);
+FN_RECEIVE_RESPONSE(TopicResponse, MSG_TYPE_TOPIC_RESPONSE);
+FN_RECEIVE_RESPONSE(TopicPublishersUpdate, MSG_TYPE_TOPIC_PUBLISHERS_UPDATE);
+FN_RECEIVE_RESPONSE(TopicSubscribersUpdate, MSG_TYPE_TOPIC_SUBSCRIBERS_UPDATE);
 
-  oMessage = util::to_string(response.msg, sizeof(util::TestResponse::msg));
-}
+FN_SEND_REQUEST(ProcessRequest, MSG_TYPE_PROCESS_REQUEST);
+FN_RECEIVE_RESPONSE(ProcessResponse, MSG_TYPE_PROCESS_RESPONSE);
+FN_RECEIVE_RESPONSE(ProcessChildrenUpdate, MSG_TYPE_PROCESS_CHILDREN_UPDATE);

@@ -2,31 +2,36 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "ipc/common.hpp"
 
 
 #define KEY_LOCATION "/tmp/example.ipc-key"
-#define SERVER_MSG_TYPE 1l
+#define SERVER_PSEUDO_PID 1
 
 
 namespace util
 {
 
-// REQUESTS/RESPONSES:
-
-struct TestRequest
+template<typename T>
+struct RequestMsg
 {
-  msgKey_t type = SERVER_MSG_TYPE;
+  msgKey_t key;
+  requestId_t requestId;
   pid_t senderId;
-  char name[32];
+
+  T payload;
 };
 
-struct TestResponse
+template<typename T>
+struct ResponseMsg
 {
-  msgKey_t type;
-  char msg[64];
+  msgKey_t key;
+
+  T payload;
 };
+
 
 // FUNCTIONS:
 
@@ -46,6 +51,23 @@ int getMsgQueueId(
 );
 
 /**
+ * @brief Encode combine PID and msg type into one key value for msg_typ to enable identifying request types per application.
+ *
+ * @param msgType Identifier for the type of request/response.
+ * @param pid PID of calling/receiving process.
+ *
+ * @return Key with MSB = msgType & LSB = PID.
+ */
+msgKey_t makeMsgKey(
+  msgType_t msgType,
+  pid_t pid
+);
+
+msgKey_t makeMsgKey(
+  msgType_t msgType
+);
+
+/**
  * @brief Send a request/response message.
  *
  * @tparam T A request/response struct like {long id; ...}.
@@ -62,7 +84,6 @@ bool sendMsg(
   const T &payload,
   bool wait
 );
-#define DECLARE_TEMPLATE_SEND_MSG(templateType) template bool sendMsg<templateType>(int, const templateType &, bool)
 
 /**
  * @brief receive a request/response message.
@@ -70,7 +91,7 @@ bool sendMsg(
  * @tparam T A request/response struct like {long id; ...}.
  * @param msgQueueId The ID of the msg queue on which should be communicated.
  * @param payload The output variable for the request/response.
- * @param msgType The type of message to receive.
+ * @param msgKey The type of message to receive.
  * @param wait Wether to block/wait for message or return immedeatly if queue is empty.
  *
  * @throw IpcException When recieving a message fails.
@@ -80,35 +101,58 @@ template<typename T>
 ssize_t receiveMsg(
   int msgQueueId,
   T &payload,
-  long msgType,
+  msgKey_t msgKey,
   bool wait
 );
-#define DECLARE_TEMPLATE_receive_MSG(templateType) template ssize_t receiveMsg<templateType>(int, templateType &, long , bool)
+
+#define DECLARE_MSG_TEMPLATES(T)                                                    \
+  template struct RequestMsg<T>;                                                    \
+  template struct ResponseMsg<T>;                                                   \
+  template bool sendMsg<RequestMsg<T>>(int, const RequestMsg<T> &, bool);           \
+  template bool sendMsg<ResponseMsg<T>>(int, const ResponseMsg<T> &, bool);         \
+  template ssize_t receiveMsg<RequestMsg<T>>(int, RequestMsg<T> &, long , bool);    \
+  template ssize_t receiveMsg<ResponseMsg<T>>(int, ResponseMsg<T> &, long , bool);  \
+
+
 
 /**
  * @brief Convert maybe null terminated character array of fixed size to std::string
  *
  * @param src Pointer to initial element of source character array.
- * @param size Size of source character array.
  *
  * @return Converted string.
  */
-std::string to_string(
-  const char *src,
-  size_t size
+std::string parseString(
+  const char (&src)[MAX_STRING_SIZE]
 );
 
-/**
- * @brief Encode combine PID and msg type into one key value for msg_typ to enable identifying request types per application.
- *
- * @param msgType Identifier for the type of request/response.
- * @param pid PID of calling/receiving process.
- *
- * @return Key with MSB = msgType & LSB = PID.
- */
-msgKey_t makeMsgKey(
-  msgType_t msgType,
-  pid_t pid
+void parseString(
+  char (&dst)[MAX_STRING_SIZE],
+  const std::string &src
 );
+
+std::vector<std::string> parseStringArray(
+  const char (&src)[MAX_ARRAY_SIZE][MAX_STRING_SIZE]
+);
+
+void parseStringArray(
+  char (&dst)[MAX_ARRAY_SIZE][MAX_STRING_SIZE],
+  const std::vector<std::string> &src
+);
+
+template<typename T>
+std::vector<T> parseArray(
+  const T (&src)[MAX_ARRAY_SIZE]
+);
+
+template<typename T>
+void parseArray(
+  T (&dst)[MAX_ARRAY_SIZE],
+  const std::vector<T> &src
+);
+
+#define DECLARE_PARSE_ARRAY_TEMPLATE(T)                                             \
+  template std::vector<T> parseArray<T>(const T (&src)[MAX_ARRAY_SIZE]);            \
+  template void parseArray<T>(T (&dst)[MAX_ARRAY_SIZE], const std::vector<T> &src);
 
 }

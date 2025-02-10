@@ -10,6 +10,12 @@
 #include "ipc/datastructs/namespace-datastructs.hpp"
 #include "ipc/datastructs/search-datastructs.hpp"
 
+#define DECLARE_SEND_RESPONSE(ResponseType) \
+  bool send##ResponseType(const ResponseType &response, pid_t receiverId, bool wait = true)
+
+#define DECLARE_RECEIVE_REQUEST(RequestType) \
+  RequestType receive##RequestType(requestId_t &oRequestId, pid_t &oSenderId, bool wait = true)
+
 
 class IpcServer
 {
@@ -17,33 +23,25 @@ public:
   IpcServer(int projectId);
   ~IpcServer();
 
-  /**
-   * @brief Send response message back to requesting process.
-   *
-   * @param msg response message
-   * @param receiverId process id of the requesting process
-   * @param wait wether to block when message queue is full or return false
-   *
-   * @return wether message was send when wait is false, otherwise always true
-   */
-  bool sendTestResponse(
-    std::string_view msg,
-    msgKey_t receiverId,
-    bool wait = true
-  );
+  DECLARE_SEND_RESPONSE(NodeRequest);
+  DECLARE_RECEIVE_REQUEST(NodeResponse);
+  DECLARE_RECEIVE_REQUEST(NodeAliveUpdate);
+  DECLARE_RECEIVE_REQUEST(NodePublishesToUpdate);
+  DECLARE_RECEIVE_REQUEST(NodeSubscribesToUpdate);
+  DECLARE_RECEIVE_REQUEST(NodeServicesUpdate);
+  DECLARE_RECEIVE_REQUEST(NodeClientsUpdate);
 
-  /**
-   * @brief Read requests from message queue.
-   *
-   * @param oName output variable for name field of request
-   * @param oSenderId output variable for senderId field of request
-   * @param wait wether to block/wait for message or return immedeatly if queue is empty
-   */
-  void receiveTestRequest(
-    std::string &oName,
-    msgKey_t &oSenderId,
-    bool wait = true
-  );
+  DECLARE_SEND_RESPONSE(TopicRequest);
+  DECLARE_RECEIVE_REQUEST(TopicResponse);
+  DECLARE_RECEIVE_REQUEST(TopicPublishersUpdate);
+  DECLARE_RECEIVE_REQUEST(TopicSubscribersUpdate);
+  //! TODO: writeTopicDataStreamObject
+
+  DECLARE_SEND_RESPONSE(ProcessRequest);
+  DECLARE_RECEIVE_REQUEST(ProcessResponse);
+  DECLARE_RECEIVE_REQUEST(ProcessChildrenUpdate);
+  //! TODO: writeProcessDataStreamObject
+  //! TODO: writeProcessAccumulatedDataStreamObject
 
 private:
   int mMsgQueueId;

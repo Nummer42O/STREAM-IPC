@@ -10,37 +10,40 @@
 #include "ipc/datastructs/namespace-datastructs.hpp"
 #include "ipc/datastructs/search-datastructs.hpp"
 
+#define DECLARE_SEND_REQUEST(RequestType) \
+  bool send##RequestType(const RequestType &request, requestId_t &oRequestId, bool wait = true)
+
+#define DECLARE_RECEIVE_RESPONSE(ResponseType) \
+  ResponseType receive##ResponseType(bool wait = true)
+
 
 class IpcClient
 {
 public:
   IpcClient(int projectId);
 
-  /**
-   * @brief Send request for message with name.
-   *
-   * @param name name that should be in the message
-   * @param wait wether to block when message queue is full or return false
-   *
-   * @return returns wether message was send when wait is false, otherwise always true
-   */
-  bool sendTestRequest(
-    std::string_view name,
-    bool wait = true
-  );
+  DECLARE_SEND_REQUEST(NodeRequest);
+  DECLARE_RECEIVE_RESPONSE(NodeResponse);
+  DECLARE_RECEIVE_RESPONSE(NodeAliveUpdate);
+  DECLARE_RECEIVE_RESPONSE(NodePublishesToUpdate);
+  DECLARE_RECEIVE_RESPONSE(NodeSubscribesToUpdate);
+  DECLARE_RECEIVE_RESPONSE(NodeServicesUpdate);
+  DECLARE_RECEIVE_RESPONSE(NodeClientsUpdate);
 
-  /**
-   * @brief Read response from message queue.
-   *
-   * @param oMessage output variable for msg field of response
-   * @param wait wether to block/wait for message or return immedeatly if queue is empty
-   */
-  void receiveTestResponse(
-    std::string &oMessage,
-    bool wait = true
-  );
+  DECLARE_SEND_REQUEST(TopicRequest);
+  DECLARE_RECEIVE_RESPONSE(TopicResponse);
+  DECLARE_RECEIVE_RESPONSE(TopicPublishersUpdate);
+  DECLARE_RECEIVE_RESPONSE(TopicSubscribersUpdate);
+  //! TODO: readTopicDataStreamObject
+
+  DECLARE_SEND_REQUEST(ProcessRequest);
+  DECLARE_RECEIVE_RESPONSE(ProcessResponse);
+  DECLARE_RECEIVE_RESPONSE(ProcessChildrenUpdate);
+  //! TODO: readProcessDataStreamObject
+  //! TODO: readProcessAccumulatedDataStreamObject
 
 private:
+  int32_t mRequestIdCounter;
   int mMsgQueueId;
   pid_t mPid;
 };

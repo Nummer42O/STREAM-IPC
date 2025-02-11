@@ -95,23 +95,23 @@ bool sendMsg(
  * @param wait Wether to block/wait for message or return immedeatly if queue is empty.
  *
  * @throw IpcException When recieving a message fails.
- * @return The number of bytes of payload (everything except the id) read from the message queue.
+ * @return Wether a message was received when wait is false, otherwise always true.
  */
 template<typename T>
-ssize_t receiveMsg(
+bool receiveMsg(
   int msgQueueId,
   T &payload,
   msgKey_t msgKey,
   bool wait
 );
 
-#define DECLARE_MSG_TEMPLATES(T)                                                    \
-  template struct RequestMsg<T>;                                                    \
-  template struct ResponseMsg<T>;                                                   \
-  template bool sendMsg<RequestMsg<T>>(int, const RequestMsg<T> &, bool);           \
-  template bool sendMsg<ResponseMsg<T>>(int, const ResponseMsg<T> &, bool);         \
-  template ssize_t receiveMsg<RequestMsg<T>>(int, RequestMsg<T> &, long , bool);    \
-  template ssize_t receiveMsg<ResponseMsg<T>>(int, ResponseMsg<T> &, long , bool);  \
+#define DECLARE_MSG_TEMPLATES(T)                                                \
+  template struct RequestMsg<T>;                                                \
+  template struct ResponseMsg<T>;                                               \
+  template bool sendMsg<RequestMsg<T>>(int, const RequestMsg<T> &, bool);       \
+  template bool sendMsg<ResponseMsg<T>>(int, const ResponseMsg<T> &, bool);     \
+  template bool receiveMsg<RequestMsg<T>>(int, RequestMsg<T> &, long , bool);   \
+  template bool receiveMsg<ResponseMsg<T>>(int, ResponseMsg<T> &, long , bool); \
 
 
 

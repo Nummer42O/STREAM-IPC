@@ -67,7 +67,7 @@ bool sendMsg(int msgQueueId, const T &payload, bool wait)
 }
 
 template<typename T>
-ssize_t receiveMsg(int msgQueueId, T &payload, long msgType, bool wait)
+bool receiveMsg(int msgQueueId, T &payload, long msgType, bool wait)
 {
   ssize_t nrBytes = ::msgrcv(
     msgQueueId,
@@ -76,9 +76,14 @@ ssize_t receiveMsg(int msgQueueId, T &payload, long msgType, bool wait)
     wait ? 0 : IPC_NOWAIT
   );
   if (nrBytes == -1)
-    throw IpcException("msgrcv");
+  {
+    if (errno == ENOMSG)
+      return false;
 
-  return nrBytes;
+    throw IpcException("msgrcv");
+  }
+
+  return true;
 }
 
 DECLARE_MSG_TEMPLATES(NodeRequest);

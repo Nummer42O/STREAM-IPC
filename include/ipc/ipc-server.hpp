@@ -2,6 +2,7 @@
 
 #include <string>
 #include <string_view>
+#include <optional>
 #include <unistd.h>
 
 #include "ipc/common.hpp"
@@ -14,7 +15,7 @@
   bool send##ResponseType(const ResponseType &response, pid_t receiverId, bool wait = true)
 
 #define DECLARE_RECEIVE_REQUEST(RequestType) \
-  RequestType receive##RequestType(requestId_t &oRequestId, pid_t &oSenderId, bool wait = true)
+  std::optional<RequestType> receive##RequestType(requestId_t &oRequestId, pid_t &oSenderId, bool wait = true)
 
 
 class IpcServer

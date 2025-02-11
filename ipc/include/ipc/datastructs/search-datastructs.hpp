@@ -4,11 +4,11 @@
 
 #define MSG_TYPE_SEARCH_REQUEST GET_COUNTER
 struct SearchRequest {
-  enum Type {
+  enum Type: uint8_t {
     NODE,
     TOPIC
   } type;
-  MAKE_STRING(name);
+  primaryKey_t name;
 };
 
 #define MSG_TYPE_SEARCH_RESPONSE GET_COUNTER

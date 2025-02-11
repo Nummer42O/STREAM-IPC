@@ -12,5 +12,5 @@ struct NamespaceRequest {
 #define MSG_TYPE_NAMESPACE_RESPONSE GET_COUNTER
 struct NamespaceResponse {
     MAKE_STRING_ARRAY(children);
-    u_int32_t nrOfChildren;
+    uint32_t nrOfChildren;
 };

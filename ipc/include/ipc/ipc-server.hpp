@@ -23,40 +23,40 @@ public:
   IpcServer(int projectId);
   ~IpcServer();
 
-  DECLARE_SEND_RESPONSE(NodeRequest);
-  DECLARE_RECEIVE_REQUEST(NodeResponse);
-  DECLARE_RECEIVE_REQUEST(NodeAliveUpdate);
-  DECLARE_RECEIVE_REQUEST(NodePublishesToUpdate);
-  DECLARE_RECEIVE_REQUEST(NodeSubscribesToUpdate);
-  DECLARE_RECEIVE_REQUEST(NodeServicesUpdate);
-  DECLARE_RECEIVE_REQUEST(NodeClientsUpdate);
+  DECLARE_RECEIVE_REQUEST(NodeRequest);
+  DECLARE_SEND_RESPONSE(NodeResponse);
+  DECLARE_SEND_RESPONSE(NodeAliveUpdate);
+  DECLARE_SEND_RESPONSE(NodePublishesToUpdate);
+  DECLARE_SEND_RESPONSE(NodeSubscribesToUpdate);
+  DECLARE_SEND_RESPONSE(NodeServicesUpdate);
+  DECLARE_SEND_RESPONSE(NodeClientsUpdate);
 
-  DECLARE_SEND_RESPONSE(TopicRequest);
-  DECLARE_RECEIVE_REQUEST(TopicResponse);
-  DECLARE_RECEIVE_REQUEST(TopicPublishersUpdate);
-  DECLARE_RECEIVE_REQUEST(TopicSubscribersUpdate);
+  DECLARE_RECEIVE_REQUEST(TopicRequest);
+  DECLARE_SEND_RESPONSE(TopicResponse);
+  DECLARE_SEND_RESPONSE(TopicPublishersUpdate);
+  DECLARE_SEND_RESPONSE(TopicSubscribersUpdate);
   //! TODO: writeTopicDataStreamObject
 
-  DECLARE_SEND_RESPONSE(ProcessRequest);
-  DECLARE_RECEIVE_REQUEST(ProcessResponse);
-  DECLARE_RECEIVE_REQUEST(ProcessChildrenUpdate);
+  DECLARE_RECEIVE_REQUEST(ProcessRequest);
+  DECLARE_SEND_RESPONSE(ProcessResponse);
+  DECLARE_SEND_RESPONSE(ProcessChildrenUpdate);
   //! TODO: writeProcessDataStreamObject
   //! TODO: writeProcessAccumulatedDataStreamObject
 
-  DECLARE_SEND_RESPONSE(NamespaceRequest);
-  DECLARE_RECEIVE_REQUEST(NamespaceResponse);
+  DECLARE_RECEIVE_REQUEST(NamespaceRequest);
+  DECLARE_SEND_RESPONSE(NamespaceResponse);
 
-  DECLARE_SEND_RESPONSE(SearchRequest);
-  DECLARE_RECEIVE_REQUEST(SearchResponse);
+  DECLARE_RECEIVE_REQUEST(SearchRequest);
+  DECLARE_SEND_RESPONSE(SearchResponse);
 
-  DECLARE_SEND_RESPONSE(InitRequest);
-  DECLARE_RECEIVE_REQUEST(InitResponse);
+  DECLARE_RECEIVE_REQUEST(InitRequest);
+  DECLARE_SEND_RESPONSE(InitResponse);
 
-  DECLARE_SEND_RESPONSE(UnsubscribeRequest);
-  DECLARE_RECEIVE_REQUEST(UnsubscribeResponse);
+  DECLARE_RECEIVE_REQUEST(UnsubscribeRequest);
+  DECLARE_SEND_RESPONSE(UnsubscribeResponse);
 
-  DECLARE_SEND_RESPONSE(MsgRequest);
-  DECLARE_RECEIVE_REQUEST(MsgResponse);
+  DECLARE_RECEIVE_REQUEST(MsgRequest);
+  DECLARE_SEND_RESPONSE(MsgResponse);
 
 private:
   int mMsgQueueId;

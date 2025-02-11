@@ -8,10 +8,10 @@ struct SearchRequest {
     NODE,
     TOPIC
   } type;
-  primaryKey_t name;
+  primaryKey_t primaryKey;
 };
 
 #define MSG_TYPE_SEARCH_RESPONSE GET_COUNTER
 struct SearchResponse {
-  MAKE_STRING(primaryKey);
+  primaryKey_t primaryKey;
 };

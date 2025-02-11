@@ -43,6 +43,21 @@ public:
   //! TODO: writeProcessDataStreamObject
   //! TODO: writeProcessAccumulatedDataStreamObject
 
+  DECLARE_SEND_RESPONSE(NamespaceRequest);
+  DECLARE_RECEIVE_REQUEST(NamespaceResponse);
+
+  DECLARE_SEND_RESPONSE(SearchRequest);
+  DECLARE_RECEIVE_REQUEST(SearchResponse);
+
+  DECLARE_SEND_RESPONSE(InitRequest);
+  DECLARE_RECEIVE_REQUEST(InitResponse);
+
+  DECLARE_SEND_RESPONSE(UnsubscribeRequest);
+  DECLARE_RECEIVE_REQUEST(UnsubscribeResponse);
+
+  DECLARE_SEND_RESPONSE(MsgRequest);
+  DECLARE_RECEIVE_REQUEST(MsgResponse);
+
 private:
   int mMsgQueueId;
 };

@@ -42,6 +42,21 @@ public:
   //! TODO: readProcessDataStreamObject
   //! TODO: readProcessAccumulatedDataStreamObject
 
+  DECLARE_SEND_REQUEST(NamespaceRequest);
+  DECLARE_RECEIVE_RESPONSE(NamespaceResponse);
+
+  DECLARE_SEND_REQUEST(SearchRequest);
+  DECLARE_RECEIVE_RESPONSE(SearchResponse);
+
+  DECLARE_SEND_REQUEST(InitRequest);
+  DECLARE_RECEIVE_RESPONSE(InitResponse);
+
+  DECLARE_SEND_REQUEST(UnsubscribeRequest);
+  DECLARE_RECEIVE_RESPONSE(UnsubscribeResponse);
+
+  DECLARE_SEND_REQUEST(MsgRequest);
+  DECLARE_RECEIVE_RESPONSE(MsgResponse);
+
 private:
   int32_t mRequestIdCounter;
   int mMsgQueueId;

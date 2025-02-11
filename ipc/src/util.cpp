@@ -98,6 +98,20 @@ DECLARE_MSG_TEMPLATES(ProcessRequest);
 DECLARE_MSG_TEMPLATES(ProcessResponse);
 DECLARE_MSG_TEMPLATES(ProcessChildrenUpdate);
 
+DECLARE_MSG_TEMPLATES(NamespaceRequest);
+DECLARE_MSG_TEMPLATES(NamespaceResponse);
+
+DECLARE_MSG_TEMPLATES(SearchRequest);
+DECLARE_MSG_TEMPLATES(SearchResponse);
+
+DECLARE_MSG_TEMPLATES(InitRequest);
+DECLARE_MSG_TEMPLATES(InitResponse);
+
+DECLARE_MSG_TEMPLATES(UnsubscribeRequest);
+DECLARE_MSG_TEMPLATES(UnsubscribeResponse);
+
+DECLARE_MSG_TEMPLATES(MsgRequest);
+DECLARE_MSG_TEMPLATES(MsgResponse);
 
 std::string parseString(const char (&src)[MAX_STRING_SIZE])
 {

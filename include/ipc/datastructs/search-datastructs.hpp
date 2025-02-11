@@ -2,8 +2,10 @@
 
 #include "ipc/common.hpp"
 
-#define MSG_TYPE_SEARCH_REQUEST GET_COUNTER
+
 struct SearchRequest {
+  MAKE_MSG_TYPE;
+
   enum Type: uint8_t {
     NODE,
     TOPIC
@@ -11,7 +13,8 @@ struct SearchRequest {
   primaryKey_t primaryKey;
 };
 
-#define MSG_TYPE_SEARCH_RESPONSE GET_COUNTER
 struct SearchResponse {
+  MAKE_MSG_TYPE;
+
   primaryKey_t primaryKey;
 };

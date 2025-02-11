@@ -2,15 +2,18 @@
 
 #include "ipc/common.hpp"
 
-#define MSG_TYPE_NAMESPACE_REQUEST GET_COUNTER
+
 struct NamespaceRequest {
-    requestId_t id;
-    MAKE_STRING(path);
-    bool updates;
+  MAKE_MSG_TYPE;
+
+  requestId_t id;
+  MAKE_STRING(path);
+  bool updates;
 };
 
-#define MSG_TYPE_NAMESPACE_RESPONSE GET_COUNTER
 struct NamespaceResponse {
-    MAKE_STRING_ARRAY(children);
-    uint32_t nrOfChildren;
+  MAKE_MSG_TYPE;
+
+  MAKE_STRING_ARRAY(children);
+  uint32_t nrOfChildren;
 };

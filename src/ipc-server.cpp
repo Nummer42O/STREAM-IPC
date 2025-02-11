@@ -10,29 +10,29 @@ namespace fs = std::filesystem;
 #include "ipc/ipc-server.hpp"
 #include "util.hpp"
 
-#define FN_SEND_RESPONSE(ResponseType, MsgTypeNr)               \
-  bool IpcServer::send##ResponseType(                           \
-    const ResponseType &response, pid_t receiverId, bool wait)  \
-  {                                                             \
-    util::ResponseMsg<ResponseType> msg{                        \
-      .key = util::makeMsgKey(MsgTypeNr, receiverId),           \
-      .payload = response                                       \
-    };                                                          \
-                                                                \
-    return util::sendMsg(mMsgQueueId, msg, wait);               \
+#define FN_SEND_RESPONSE(ResponseType)                            \
+  bool IpcServer::send##ResponseType(                             \
+    const ResponseType &response, pid_t receiverId, bool wait)    \
+  {                                                               \
+    util::ResponseMsg<ResponseType> msg{                          \
+      .key = util::makeMsgKey(ResponseType::msgType, receiverId), \
+      .payload = response                                         \
+    };                                                            \
+                                                                  \
+    return util::sendMsg(mMsgQueueId, msg, wait);                 \
   }
 
-#define FN_RECEIVE_REQUEST(RequestType, MsgTypeNr)              \
-  RequestType IpcServer::receive##RequestType(                  \
-    requestId_t &oRequestId, pid_t &oSenderId, bool wait)       \
-  {                                                             \
-    util::RequestMsg<RequestType> msg;                          \
-    msgKey_t msgKey = util::makeMsgKey(MsgTypeNr);              \
-    util::receiveMsg(mMsgQueueId, msg, msgKey, wait);           \
-                                                                \
-    oRequestId = msg.requestId;                                 \
-    oSenderId = msg.senderId;                                   \
-    return msg.payload;                                         \
+#define FN_RECEIVE_REQUEST(RequestType)                           \
+  RequestType IpcServer::receive##RequestType(                    \
+    requestId_t &oRequestId, pid_t &oSenderId, bool wait)         \
+  {                                                               \
+    util::RequestMsg<RequestType> msg;                            \
+    msgKey_t msgKey = util::makeMsgKey(RequestType::msgType);     \
+    util::receiveMsg(mMsgQueueId, msg, msgKey, wait);             \
+                                                                  \
+    oRequestId = msg.requestId;                                   \
+    oSenderId = msg.senderId;                                     \
+    return msg.payload;                                           \
   }
 
 
@@ -54,34 +54,34 @@ IpcServer::~IpcServer()
 }
 
 
-FN_RECEIVE_REQUEST(NodeRequest, MSG_TYPE_NODE_REQUEST);
-FN_SEND_RESPONSE(NodeResponse, MSG_TYPE_NODE_RESPONSE);
-FN_SEND_RESPONSE(NodeAliveUpdate, MSG_TYPE_NODE_ALIVE_UPDATE);
-FN_SEND_RESPONSE(NodePublishesToUpdate, MSG_TYPE_NODE_PUBLISHES_TO_UPDATE);
-FN_SEND_RESPONSE(NodeSubscribesToUpdate, MSG_TYPE_NODE_SUBSCRIBES_TO_UPDATE);
-FN_SEND_RESPONSE(NodeServicesUpdate, MSG_TYPE_NODE_SERVICES_UPDATE);
-FN_SEND_RESPONSE(NodeClientsUpdate, MSG_TYPE_NODE_CLIENTS_UPDATE);
+FN_RECEIVE_REQUEST(NodeRequest);
+FN_SEND_RESPONSE(NodeResponse);
+FN_SEND_RESPONSE(NodeAliveUpdate);
+FN_SEND_RESPONSE(NodePublishesToUpdate);
+FN_SEND_RESPONSE(NodeSubscribesToUpdate);
+FN_SEND_RESPONSE(NodeServicesUpdate);
+FN_SEND_RESPONSE(NodeClientsUpdate);
 
-FN_RECEIVE_REQUEST(TopicRequest, MSG_TYPE_TOPIC_REQUEST);
-FN_SEND_RESPONSE(TopicResponse, MSG_TYPE_TOPIC_RESPONSE);
-FN_SEND_RESPONSE(TopicPublishersUpdate, MSG_TYPE_TOPIC_PUBLISHERS_UPDATE);
-FN_SEND_RESPONSE(TopicSubscribersUpdate, MSG_TYPE_TOPIC_SUBSCRIBERS_UPDATE);
+FN_RECEIVE_REQUEST(TopicRequest);
+FN_SEND_RESPONSE(TopicResponse);
+FN_SEND_RESPONSE(TopicPublishersUpdate);
+FN_SEND_RESPONSE(TopicSubscribersUpdate);
 
-FN_RECEIVE_REQUEST(ProcessRequest, MSG_TYPE_PROCESS_REQUEST);
-FN_SEND_RESPONSE(ProcessResponse, MSG_TYPE_PROCESS_RESPONSE);
-FN_SEND_RESPONSE(ProcessChildrenUpdate, MSG_TYPE_PROCESS_CHILDREN_UPDATE);
+FN_RECEIVE_REQUEST(ProcessRequest);
+FN_SEND_RESPONSE(ProcessResponse);
+FN_SEND_RESPONSE(ProcessChildrenUpdate);
 
-FN_RECEIVE_REQUEST(NamespaceRequest, MSG_TYPE_NAMESPACE_REQUEST);
-FN_SEND_RESPONSE(NamespaceResponse, MSG_TYPE_NAMESPACE_RESPONSE);
+FN_RECEIVE_REQUEST(NamespaceRequest);
+FN_SEND_RESPONSE(NamespaceResponse);
 
-FN_RECEIVE_REQUEST(SearchRequest, MSG_TYPE_SEARCH_REQUEST);
-FN_SEND_RESPONSE(SearchResponse, MSG_TYPE_SEARCH_RESPONSE);
+FN_RECEIVE_REQUEST(SearchRequest);
+FN_SEND_RESPONSE(SearchResponse);
 
-FN_RECEIVE_REQUEST(InitRequest, MSG_TYPE_INIT_REQUEST);
-FN_SEND_RESPONSE(InitResponse, MSG_TYPE_INIT_RESPONSE);
+FN_RECEIVE_REQUEST(InitRequest);
+FN_SEND_RESPONSE(InitResponse);
 
-FN_RECEIVE_REQUEST(UnsubscribeRequest, MSG_TYPE_UNSUBSCRIBE_REQUEST);
-FN_SEND_RESPONSE(UnsubscribeResponse, MSG_TYPE_UNSUBSCRIBE_RESPONSE);
+FN_RECEIVE_REQUEST(UnsubscribeRequest);
+FN_SEND_RESPONSE(UnsubscribeResponse);
 
-FN_RECEIVE_REQUEST(MsgRequest, MSG_TYPE_MSG_REQUEST);
-FN_SEND_RESPONSE(MsgResponse, MSG_TYPE_MSG_RESPONSE);
+FN_RECEIVE_REQUEST(MsgRequest);
+FN_SEND_RESPONSE(MsgResponse);

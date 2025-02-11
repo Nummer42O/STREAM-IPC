@@ -3,16 +3,18 @@
 #include "ipc/common.hpp"
 
 
-#define MSG_TYPE_NODE_REQUEST GET_COUNTER
 struct NodeRequest
 {
+  MAKE_MSG_TYPE;
+
   primaryKey_t primaryKey;
   bool updates;
 };
 
-#define MSG_TYPE_NODE_ALIVE_UPDATE GET_COUNTER
 struct NodeAliveUpdate
 {
+  MAKE_MSG_TYPE;
+
   primaryKey_t primaryKey;
   bool alive;
   time_t aliveChangeTime;
@@ -20,23 +22,26 @@ struct NodeAliveUpdate
   pid_t pid;
 };
 
-#define MSG_TYPE_NODE_PUBLISHES_TO_UPDATE GET_COUNTER
 struct NodePublishesToUpdate
 {
+  MAKE_MSG_TYPE;
+
   primaryKey_t primaryKey;
   MAKE_ARRAY(primaryKey_t, publishesTo);
 };
 
-#define MSG_TYPE_NODE_SUBSCRIBES_TO_UPDATE GET_COUNTER
 struct NodeSubscribesToUpdate
 {
+  MAKE_MSG_TYPE;
+
   primaryKey_t primaryKey;
   MAKE_ARRAY(primaryKey_t, subscribesTo);
 };
 
-#define MSG_TYPE_NODE_SERVICES_UPDATE GET_COUNTER
 struct NodeServicesUpdate
 {
+  MAKE_MSG_TYPE;
+
   primaryKey_t primaryKey;
   struct Service
   {
@@ -45,16 +50,18 @@ struct NodeServicesUpdate
   } services[MAX_ARRAY_SIZE];
 };
 
-#define MSG_TYPE_NODE_CLIENTS_UPDATE GET_COUNTER
 struct NodeClientsUpdate
 {
+  MAKE_MSG_TYPE;
+
   primaryKey_t primaryKey;
   MAKE_ARRAY(primaryKey_t, clients);
 };
 
-#define MSG_TYPE_NODE_RESPONSE GET_COUNTER
 struct NodeResponse
 {
+  MAKE_MSG_TYPE;
+
   primaryKey_t primaryKey;
   MAKE_STRING(name);
   MAKE_STRING(pkgName);
@@ -70,32 +77,36 @@ struct NodeResponse
 };
 
 
-#define MSG_TYPE_TOPIC_REQUEST GET_COUNTER
 struct TopicRequest
 {
+  MAKE_MSG_TYPE;
+
   primaryKey_t primaryKey;
   double targetFrequency;
   bool updates;
   bool continuous;
 };
 
-#define MSG_TYPE_TOPIC_PUBLISHERS_UPDATE GET_COUNTER
 struct TopicPublishersUpdate
 {
+  MAKE_MSG_TYPE;
+
   primaryKey_t primaryKey;
   MAKE_ARRAY(primaryKey_t, publishers);
 };
 
-#define MSG_TYPE_TOPIC_SUBSCRIBERS_UPDATE GET_COUNTER
 struct TopicSubscribersUpdate
 {
+  MAKE_MSG_TYPE;
+
   primaryKey_t primaryKey;
   MAKE_ARRAY(primaryKey_t, subscribers);
 };
 
-#define MSG_TYPE_TOPIC_RESPONSE GET_COUNTER
 struct TopicResponse
 {
+  MAKE_MSG_TYPE;
+
   primaryKey_t primaryKey;
   MAKE_STRING(name);
   MAKE_STRING(type);
@@ -114,9 +125,10 @@ struct TopicDataStreamObject
 };
 
 
-#define MSG_TYPE_PROCESS_REQUEST GET_COUNTER
 struct ProcessRequest
 {
+  MAKE_MSG_TYPE;
+
   pid_t pid; // primaryKey
   bool updates;
   enum class ContinuousType
@@ -125,16 +137,18 @@ struct ProcessRequest
   } continuous;
 };
 
-#define MSG_TYPE_PROCESS_CHILDREN_UPDATE GET_COUNTER
 struct ProcessChildrenUpdate
 {
+  MAKE_MSG_TYPE;
+
   pid_t pid;
   MAKE_ARRAY(pid_t, children);
 };
 
-#define MSG_TYPE_PROCESS_RESPONSE GET_COUNTER
 struct ProcessResponse
 {
+  MAKE_MSG_TYPE;
+
   pid_t pid;
   MAKE_STRING(name);
   sharedMemoryLocation_t sharedMemoryLocation;

@@ -14,7 +14,8 @@
   char fieldName[MAX_ARRAY_SIZE][MAX_STRING_SIZE] = {0}
 
 static const uint32_t _INITIAL_COUNTER_VALUE = __COUNTER__;
-#define GET_COUNTER (__COUNTER__ - _INITIAL_COUNTER_VALUE)
+#define MAKE_MSG_TYPE \
+  static const msgType_t msgType = (__COUNTER__ - _INITIAL_COUNTER_VALUE)
 
 using msgKey_t                = __syscall_slong_t;
 using msgType_t               = int32_t;

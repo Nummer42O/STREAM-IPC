@@ -28,14 +28,15 @@ namespace fs = std::filesystem;
     return util::sendMsg(mMsgQueueId, msg, wait);           \
   }
 
-#define FN_RECEIVE_RESPONSE(ResponseType, MsgTypeNr)        \
-  ResponseType IpcClient::receive##ResponseType(bool wait)  \
-  {                                                         \
-    util::ResponseMsg<ResponseType> msg;                    \
-    msgKey_t msgKey = util::makeMsgKey(MsgTypeNr, mPid);    \
-    util::receiveMsg(mMsgQueueId, msg, msgKey, wait);       \
-                                                            \
-    return msg.payload;                                     \
+#define FN_RECEIVE_RESPONSE(ResponseType, MsgTypeNr)                      \
+  std::optional<ResponseType> IpcClient::receive##ResponseType(bool wait) \
+  {                                                                       \
+    util::ResponseMsg<ResponseType> msg;                                  \
+    msgKey_t msgKey = util::makeMsgKey(MsgTypeNr, mPid);                  \
+    if (util::receiveMsg(mMsgQueueId, msg, msgKey, wait))                 \
+      return msg.payload;                                                 \
+    else                                                                  \
+      return {};                                                          \
   }
 
 

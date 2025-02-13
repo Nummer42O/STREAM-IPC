@@ -23,16 +23,19 @@ namespace fs = std::filesystem;
   }
 
 #define FN_RECEIVE_REQUEST(RequestType, MsgTypeNr)              \
-  RequestType IpcServer::receive##RequestType(                  \
+  std::optional<RequestType> IpcServer::receive##RequestType(   \
     requestId_t &oRequestId, pid_t &oSenderId, bool wait)       \
   {                                                             \
     util::RequestMsg<RequestType> msg;                          \
     msgKey_t msgKey = util::makeMsgKey(MsgTypeNr);              \
-    util::receiveMsg(mMsgQueueId, msg, msgKey, wait);           \
-                                                                \
-    oRequestId = msg.requestId;                                 \
-    oSenderId = msg.senderId;                                   \
-    return msg.payload;                                         \
+    if (util::receiveMsg(mMsgQueueId, msg, msgKey, wait))       \
+    {                                                           \
+      oRequestId = msg.requestId;                               \
+      oSenderId = msg.senderId;                                 \
+      return msg.payload;                                       \
+    }                                                           \
+    else                                                        \
+      return {};                                                \
   }
 
 

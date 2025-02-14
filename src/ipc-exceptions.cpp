@@ -4,6 +4,9 @@
 #include <cstring>
 
 
+namespace ipc
+{
+
 IpcException::IpcException(std::string_view sourceFunction)
 {
   mMsg = (std::stringstream() \
@@ -16,4 +19,6 @@ IpcException::IpcException(std::string_view sourceFunction)
 const char *IpcException::what() const noexcept
 {
   return mMsg.c_str();
+}
+
 }

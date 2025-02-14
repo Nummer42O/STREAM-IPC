@@ -13,6 +13,10 @@
 #define MAKE_STRING_ARRAY(fieldName) \
   char fieldName[MAX_ARRAY_SIZE][MAX_STRING_SIZE] = {0}
 
+
+namespace ipc
+{
+
 static const uint32_t _INITIAL_COUNTER_VALUE = __COUNTER__;
 #define GET_COUNTER (__COUNTER__ - _INITIAL_COUNTER_VALUE)
 
@@ -21,3 +25,5 @@ using msgType_t               = int32_t;
 using primaryKey_t            = uint32_t;
 using requestId_t             = uint32_t;
 using sharedMemoryLocation_t  = uint32_t; //! TODO: needs actual type
+
+}

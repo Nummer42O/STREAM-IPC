@@ -18,6 +18,11 @@
   std::optional<ResponseType> receive##ResponseType(bool wait = true)
 
 
+namespace ipc
+{
+
+using namespace ipc::datastructs;
+
 class IpcClient
 {
 public:
@@ -63,3 +68,5 @@ private:
   int mMsgQueueId;
   pid_t mPid;
 };
+
+}

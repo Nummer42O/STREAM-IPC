@@ -4,6 +4,8 @@
 #include <string_view>
 #include <string>
 
+namespace ipc
+{
 
 class IpcException: public std::exception
 {
@@ -14,3 +16,5 @@ public:
 private:
   std::string mMsg;
 };
+
+}

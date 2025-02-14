@@ -40,6 +40,9 @@ namespace fs = std::filesystem;
   }
 
 
+namespace ipc
+{
+
 IpcClient::IpcClient(int projectId)
 {
   mRequestIdCounter = 0;
@@ -47,6 +50,8 @@ IpcClient::IpcClient(int projectId)
   mPid = ::getpid();
 }
 
+
+using namespace ipc::datastructs;
 
 FN_SEND_REQUEST(NodeRequest, MSG_TYPE_NODE_REQUEST);
 FN_RECEIVE_RESPONSE(NodeResponse, MSG_TYPE_NODE_RESPONSE);
@@ -79,3 +84,5 @@ FN_RECEIVE_RESPONSE(UnsubscribeResponse, MSG_TYPE_UNSUBSCRIBE_RESPONSE);
 
 FN_SEND_REQUEST(MsgRequest, MSG_TYPE_MSG_REQUEST);
 FN_RECEIVE_RESPONSE(MsgResponse, MSG_TYPE_MSG_RESPONSE);
+
+}

@@ -16,6 +16,8 @@
 
 namespace util {
 
+using namespace ipc;
+
 int getMsgQueueId(int projectId, bool create)
 {
   assert((projectId & 0x000000FF) > 0);
@@ -86,37 +88,37 @@ bool receiveMsg(int msgQueueId, T &payload, long msgType, bool wait)
   return true;
 }
 
-DECLARE_MSG_TEMPLATES(NodeRequest);
-DECLARE_MSG_TEMPLATES(NodeResponse);
-DECLARE_MSG_TEMPLATES(NodeAliveUpdate);
-DECLARE_MSG_TEMPLATES(NodePublishesToUpdate);
-DECLARE_MSG_TEMPLATES(NodeSubscribesToUpdate);
-DECLARE_MSG_TEMPLATES(NodeServicesUpdate);
-DECLARE_MSG_TEMPLATES(NodeClientsUpdate);
+DECLARE_MSG_TEMPLATES(datastructs::NodeRequest);
+DECLARE_MSG_TEMPLATES(datastructs::NodeResponse);
+DECLARE_MSG_TEMPLATES(datastructs::NodeAliveUpdate);
+DECLARE_MSG_TEMPLATES(datastructs::NodePublishesToUpdate);
+DECLARE_MSG_TEMPLATES(datastructs::NodeSubscribesToUpdate);
+DECLARE_MSG_TEMPLATES(datastructs::NodeServicesUpdate);
+DECLARE_MSG_TEMPLATES(datastructs::NodeClientsUpdate);
 
-DECLARE_MSG_TEMPLATES(TopicRequest);
-DECLARE_MSG_TEMPLATES(TopicResponse);
-DECLARE_MSG_TEMPLATES(TopicPublishersUpdate);
-DECLARE_MSG_TEMPLATES(TopicSubscribersUpdate);
+DECLARE_MSG_TEMPLATES(datastructs::TopicRequest);
+DECLARE_MSG_TEMPLATES(datastructs::TopicResponse);
+DECLARE_MSG_TEMPLATES(datastructs::TopicPublishersUpdate);
+DECLARE_MSG_TEMPLATES(datastructs::TopicSubscribersUpdate);
 
-DECLARE_MSG_TEMPLATES(ProcessRequest);
-DECLARE_MSG_TEMPLATES(ProcessResponse);
-DECLARE_MSG_TEMPLATES(ProcessChildrenUpdate);
+DECLARE_MSG_TEMPLATES(datastructs::ProcessRequest);
+DECLARE_MSG_TEMPLATES(datastructs::ProcessResponse);
+DECLARE_MSG_TEMPLATES(datastructs::ProcessChildrenUpdate);
 
-DECLARE_MSG_TEMPLATES(NamespaceRequest);
-DECLARE_MSG_TEMPLATES(NamespaceResponse);
+DECLARE_MSG_TEMPLATES(datastructs::NamespaceRequest);
+DECLARE_MSG_TEMPLATES(datastructs::NamespaceResponse);
 
-DECLARE_MSG_TEMPLATES(SearchRequest);
-DECLARE_MSG_TEMPLATES(SearchResponse);
+DECLARE_MSG_TEMPLATES(datastructs::SearchRequest);
+DECLARE_MSG_TEMPLATES(datastructs::SearchResponse);
 
-DECLARE_MSG_TEMPLATES(InitRequest);
-DECLARE_MSG_TEMPLATES(InitResponse);
+DECLARE_MSG_TEMPLATES(datastructs::InitRequest);
+DECLARE_MSG_TEMPLATES(datastructs::InitResponse);
 
-DECLARE_MSG_TEMPLATES(UnsubscribeRequest);
-DECLARE_MSG_TEMPLATES(UnsubscribeResponse);
+DECLARE_MSG_TEMPLATES(datastructs::UnsubscribeRequest);
+DECLARE_MSG_TEMPLATES(datastructs::UnsubscribeResponse);
 
-DECLARE_MSG_TEMPLATES(MsgRequest);
-DECLARE_MSG_TEMPLATES(MsgResponse);
+DECLARE_MSG_TEMPLATES(datastructs::MsgRequest);
+DECLARE_MSG_TEMPLATES(datastructs::MsgResponse);
 
 std::string parseString(const char (&src)[MAX_STRING_SIZE])
 {

@@ -14,6 +14,8 @@
 namespace util
 {
 
+using namespace ipc;
+
 template<typename T>
 struct RequestMsg
 {

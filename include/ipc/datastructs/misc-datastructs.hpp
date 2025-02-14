@@ -2,6 +2,10 @@
 
 #include "ipc/common.hpp"
 
+
+namespace ipc::datastructs
+{
+
 #define MSG_TYPE_INIT_REQUEST GET_COUNTER
 struct InitRequest {
   MAKE_STRING(ignoredTopic);
@@ -29,3 +33,5 @@ struct MsgRequest {
 struct MsgResponse {
   sharedMemoryLocation_t sharedMemPtr;
 };
+
+}

@@ -39,6 +39,9 @@ namespace fs = std::filesystem;
   }
 
 
+namespace ipc
+{
+
 IpcServer::IpcServer(int projectId)
 {
   if (!fs::exists(KEY_LOCATION))
@@ -56,6 +59,8 @@ IpcServer::~IpcServer()
       << " closing message queue: " << strerrordesc_np(errno) << '\n';
 }
 
+
+using namespace ipc::datastructs;
 
 FN_RECEIVE_REQUEST(NodeRequest, MSG_TYPE_NODE_REQUEST);
 FN_SEND_RESPONSE(NodeResponse, MSG_TYPE_NODE_RESPONSE);
@@ -88,3 +93,5 @@ FN_SEND_RESPONSE(UnsubscribeResponse, MSG_TYPE_UNSUBSCRIBE_RESPONSE);
 
 FN_RECEIVE_REQUEST(MsgRequest, MSG_TYPE_MSG_REQUEST);
 FN_SEND_RESPONSE(MsgResponse, MSG_TYPE_MSG_RESPONSE);
+
+}

@@ -2,6 +2,10 @@
 
 #include "ipc/common.hpp"
 
+
+namespace ipc::datastructs
+{
+
 #define MSG_TYPE_SEARCH_REQUEST GET_COUNTER
 struct SearchRequest {
   enum Type: uint8_t {
@@ -15,3 +19,5 @@ struct SearchRequest {
 struct SearchResponse {
   primaryKey_t primaryKey;
 };
+
+}

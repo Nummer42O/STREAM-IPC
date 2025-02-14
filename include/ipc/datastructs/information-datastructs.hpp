@@ -3,6 +3,9 @@
 #include "ipc/common.hpp"
 
 
+namespace ipc::datastructs
+{
+
 #define MSG_TYPE_NODE_REQUEST GET_COUNTER
 struct NodeRequest
 {
@@ -153,3 +156,5 @@ struct ProcessAccumulatedDataStreamObject
   pid_t pid;
   ProcessDataStreamObject normal, accumulated;
 };
+
+}

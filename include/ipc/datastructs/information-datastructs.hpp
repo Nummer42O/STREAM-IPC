@@ -117,12 +117,9 @@ struct TopicDataStreamObject
 #define MSG_TYPE_PROCESS_REQUEST GET_COUNTER
 struct ProcessRequest
 {
-  pid_t pid; // primaryKey
+  pid_t primaryKey; // pid of requested process (NOT of requesting process)
   bool updates;
-  enum class ContinuousType
-  {
-    ON, ACCUMULATED, OFF
-  } continuous;
+  bool continuous;
 };
 
 #define MSG_TYPE_PROCESS_CHILDREN_UPDATE GET_COUNTER

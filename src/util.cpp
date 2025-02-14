@@ -69,7 +69,7 @@ bool sendMsg(int msgQueueId, const T &payload, bool wait)
 }
 
 template<typename T>
-bool receiveMsg(int msgQueueId, T &payload, long msgType, bool wait)
+bool receiveMsg(int msgQueueId, T &payload, msgKey_t msgType, bool wait)
 {
   ssize_t nrBytes = ::msgrcv(
     msgQueueId,

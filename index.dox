@@ -1,0 +1,31 @@
+/**
+ * @defgroup util util
+ *
+ * @details
+ * A collection of utility functions and structures to be used inside the implementation of IPC itself.
+ */
+
+/**
+ * @defgroup ipc ipc
+ *
+ * @details
+ * TODO
+ */
+
+/**
+ * @defgroup ipc_datastructs datastructs
+ * @ingroup ipc
+ *
+ * @details
+ * TODO
+ */
+
+/** @mainpage STREAM-IPC
+ * # TODO
+ * - exclude namespace from function name since we always use groups for namespaces (may there be an entirely other way?)
+ * - make proper main page
+ * - integrated documentation compilation into build process
+ *   - separate target
+ *   - required by install target?
+ *   - install doc?
+ */

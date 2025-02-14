@@ -10,6 +10,7 @@
 #include "ipc/datastructs/misc-datastructs.hpp"
 #include "ipc/datastructs/namespace-datastructs.hpp"
 #include "ipc/datastructs/search-datastructs.hpp"
+#include "ipc/datastructs/intern/intern-datastructs.hpp"
 
 #define DECLARE_SEND_REQUEST(RequestType) \
   bool send##RequestType(const RequestType &request, requestId_t &oRequestId, bool wait = true)
@@ -57,6 +58,9 @@ public:
 
   DECLARE_SEND_REQUEST(MsgRequest);
   DECLARE_RECEIVE_RESPONSE(MsgResponse);
+
+  DECLARE_SEND_REQUEST(ProcSwitchRequest);
+  DECLARE_RECEIVE_RESPONSE(ProcSwitchResponse);
 
 private:
   int32_t mRequestIdCounter;

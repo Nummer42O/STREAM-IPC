@@ -18,7 +18,7 @@ namespace util {
 
 int getMsgQueueId(int projectId, bool create)
 {
-  assert(projectId & 0x0000FFFF > 0);
+  assert((projectId & 0x000000FF) > 0);
 
   key_t key = ::ftok(KEY_LOCATION, projectId);
   if (key == -1)

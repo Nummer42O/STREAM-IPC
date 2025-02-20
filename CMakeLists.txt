@@ -7,7 +7,7 @@ project(ipc
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
-find_package(ament_cmake)
+find_package(ament_cmake QUIET)
 
 add_library(ipc_lib
   SHARED

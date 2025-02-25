@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(ipc
-  VERSION 0.1.0
+  VERSION 0.1.1
   LANGUAGES CXX
 )
 
@@ -9,14 +9,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 find_package(ament_cmake QUIET)
 
-add_library(ipc_lib
-  SHARED
-    src/ipc-client.cpp
-    src/ipc-exceptions.cpp
-    src/ipc-server.cpp
-    src/util.cpp
+add_library(ipc_lib)
+target_include_directories(ipc_lib
+  PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include>
+  PRIVATE src
 )
-target_include_directories(ipc_lib PRIVATE include)
+add_subdirectory(src)
 
 
 if (ament_cmake_FOUND)

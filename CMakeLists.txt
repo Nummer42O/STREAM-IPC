@@ -12,7 +12,7 @@ find_package(ament_cmake QUIET)
 add_library(ipc_lib)
 target_include_directories(ipc_lib
   PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include>
   PRIVATE src
 )

@@ -63,9 +63,9 @@ struct ResponseMsg
 /**
  * @brief Get the ID of the message queue.
  *
- * @param projectId An ID unique to the communication channel that should be opened.
- *                  The least significant 8bits must be greater then 0.
- * @param create Wether the msg queue should be explicitly created or an existing id is expected.
+ * @param[in]   projectId An ID unique to the communication channel that should be opened.
+ *                        The least significant 8bits must be greater then 0.
+ * @param[in]   create Wether the msg queue should be explicitly created or an existing id is expected.
  *
  * @throw ipc::IpcException When creating the key or getting/creating the message queue id fails.
  * @return ID of the message queue.
@@ -78,10 +78,10 @@ int getMsgQueueId(
 /**
  * @brief Encode PID and msg type into one key value for `msgtyp` to enable identifying request types per application.
  *
- * @param msgType Identifier for the type of request/response.
- * @param pid PID of calling/receiving process.
+ * @param[in]  msgType Identifier for the type of request/response.
+ * @param[in]  pid PID of calling/receiving process.
  *
- * @return Key with MSB = msgType & LSB = PID.
+ * @return Key with MSB = @p msgType & LSB = @p pid.
  */
 msgKey_t makeMsgKey(
   msgType_t msgType,
@@ -91,9 +91,9 @@ msgKey_t makeMsgKey(
 /**
  * @brief Encode `SERVER_PSEUDO_PID` and msg type into one key value for `msgtyp` to enable identifying request types per application.
  *
- * @param msgType Identifier for the type of request/response.
+ * @param[in]  msgType Identifier for the type of request/response.
  *
- * @return Key with MSB = msgType & LSB = `SERVER_PSEUDO_PID`.
+ * @return Key with MSB = @p msgType & LSB = `SERVER_PSEUDO_PID`.
  */
 msgKey_t makeMsgKey(
   msgType_t msgType
@@ -102,10 +102,10 @@ msgKey_t makeMsgKey(
 /**
  * @brief Send a request/response message.
  *
- * @tparam T A request/response struct like {long id; ...}.
- * @param msgQueueId The ID of the msg queue on which should be communicated.
- * @param payload The request/response to be send.
- * @param wait Wether to block when the message queue is full or return false.
+ * @tparam T A request/response struct like `{long id; ...}`.
+ * @param[in]  msgQueueId The ID of the msg queue on which should be communicated.
+ * @param[in]  payload The request/response to be send.
+ * @param[in]  wait Wether to block when the message queue is full or return false.
  *
  * @throw ipc::IpcException When sending a message fails. Does not include EAGAIN.
  * @return Wether the message was send when wait is false, otherwise always true.
@@ -120,11 +120,11 @@ bool sendMsg(
 /**
  * @brief receive a request/response message.
  *
- * @tparam T A request/response struct like {long id; ...}.
- * @param msgQueueId The ID of the msg queue on which should be communicated.
- * @param payload The output variable for the request/response.
- * @param msgKey The type of message to receive.
- * @param wait Wether to block/wait for message or return immedeatly if queue is empty.
+ * @tparam T A request/response struct like `{long id; ...}`.
+ * @param[in] msgQueueId The ID of the msg queue on which should be communicated.
+ * @param[out] payload The output variable for the request/response.
+ * @param[in] msgKey The type of message to receive.
+ * @param[in] wait Wether to block/wait for message or return immedeatly if queue is empty.
  *
  * @throw ipc::IpcException When recieving a message fails.
  * @return Wether a message was received when wait is false, otherwise always true.
@@ -150,9 +150,9 @@ bool receiveMsg(
  *
  * Data source that does not fill out the array is expected to be null terminated.
  *
- * @param src Source character array.
+ * @param[in]  src Source character array.
  *
- * @return STL string constructed from `src`.
+ * @return STL string.
  */
 std::string parseString(
   const char (&src)[MAX_STRING_SIZE]
@@ -161,11 +161,11 @@ std::string parseString(
 /**
  * @brief Convert STL string to character array.
  *
- * If `src.size() > MAX_STRING_SIZE`, dst will be a truncated version of src.
- * If `src.size() < MAX_STRING_SIZE`, dst will be null terminated.
+ * If `src.size() > MAX_STRING_SIZE`, @p dst will be a truncated version of @p src. <br>
+ * If `src.size() < MAX_STRING_SIZE`, @p dst will be null terminated.
  *
- * @param dst Destination character array.
- * @param src Source STL string.
+ * @param[out] dst Destination character array.
+ * @param[in]  src Source STL string.
  */
 void parseString(
   char (&dst)[MAX_STRING_SIZE],
@@ -178,7 +178,7 @@ void parseString(
  * If the array is not full, it is expected to be null terminated.
  * Similarly, if the string does not fill out the character array it is expected to be null terminated.
  *
- * @param src Source array of character arrays.
+ * @param[in]  src Source array of character arrays.
  *
  * @return STL vector of STL strings.
  */
@@ -189,13 +189,13 @@ std::vector<std::string> parseStringArray(
 /**
  * @brief Convert STL vector of STL strings to array of character arrays.
  *
- * If `src.size() > MAX_ARRAY_SIZE`, dst will be a truncated version of src. <br>
- * If `src.size() < MAX_ARRAY_SIZE`, dst will be null terminated. <br>
- * If `src[i].size() > MAX_STRING_SIZE`, dst[i] will be a truncated version of src[i]. <br>
- * If `src[i].size() < MAX_STRING_SIZE`, dst[i] will be null terminated. <br>
+ * If `src.size() > MAX_ARRAY_SIZE`, @p dst will be a truncated version of @p src. <br>
+ * If `src.size() < MAX_ARRAY_SIZE`, @p dst will be null terminated. <br>
+ * If `src[i].size() > MAX_STRING_SIZE`, `dst[i]` will be a truncated version of `src[i]`. <br>
+ * If `src[i].size() < MAX_STRING_SIZE`, `dst[i]` will be null terminated. <br>
  *
- * @param dst Destination array of character arrays.
- * @param src Source STL vector of STL strings.
+ * @param[out] dst Destination array of character arrays.
+ * @param[in]  src Source STL vector of STL strings.
  */
 void parseStringArray(
   char (&dst)[MAX_ARRAY_SIZE][MAX_STRING_SIZE],
@@ -203,12 +203,12 @@ void parseStringArray(
 );
 
 /**
- * @brief Convert array of `T` into a STL vector of `T`.
+ * @brief Convert array of @p T into a STL vector of @p T.
  *
  * @tparam T A trivially construtcable and comparable type. Must be nullable.
- * @param src Source array of T.
+ * @param[in]  src Source array of @p T.
  *
- * @return STL vector of T.
+ * @return STL vector of @p T.
  */
 template<typename T>
 std::vector<T> parseArray(
@@ -216,11 +216,11 @@ std::vector<T> parseArray(
 );
 
 /**
- * @brief Convert STL vector of `T` into a array of `T`.
+ * @brief Convert STL vector of @p T into a array of @p T.
  *
  * @tparam T A trivially constructable and comparable type. Must be nullable.
- * @param dst Destination array of T.
- * @param src Source STL vector of T.
+ * @param[out] dst Destination array of @p T.
+ * @param[in]  src Source STL vector of @p T.
  */
 template<typename T>
 void parseArray(

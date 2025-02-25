@@ -28,4 +28,5 @@
  *   - separate target
  *   - required by install target?
  *   - install doc?
+ * - maybe typedef char array and array of char array? would make some parameters more readable
  */

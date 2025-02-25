@@ -23,9 +23,24 @@ namespace ipc
 
 using namespace ipc::datastructs;
 
+/**
+ * @addtogroup ipc
+ * @{
+ */
+
+/**
+ * @brief A client to send requests for and receive said information.
+ */
 class IpcClient
 {
 public:
+  /**
+   * @brief Create a new client instance.
+   *
+   * If no @ref ipc::IpcServer Server with the same @p projectId was yet invoked this might fail.
+   *
+   * @param projectId 
+   */
   IpcClient(int projectId);
 
   DECLARE_SEND_REQUEST(NodeRequest);
@@ -68,5 +83,7 @@ private:
   int mMsgQueueId;
   pid_t mPid;
 };
+
+//! @}
 
 }

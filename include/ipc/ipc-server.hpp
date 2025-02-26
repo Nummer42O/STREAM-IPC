@@ -60,8 +60,8 @@ public:
   DECLARE_RECEIVE_REQUEST(MsgRequest);
   DECLARE_SEND_RESPONSE(MsgResponse);
 
-  DECLARE_RECEIVE_REQUEST(ProcSwitchRequest);
-  DECLARE_SEND_RESPONSE(ProcSwitchResponse);
+  DECLARE_RECEIVE_REQUEST(NodeSwitchRequest);
+  DECLARE_SEND_RESPONSE(NodeSwitchResponse);
 
 private:
   int mMsgQueueId;

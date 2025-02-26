@@ -119,8 +119,8 @@ DECLARE_MSG_TEMPLATES(UnsubscribeResponse);
 DECLARE_MSG_TEMPLATES(MsgRequest);
 DECLARE_MSG_TEMPLATES(MsgResponse);
 
-DECLARE_MSG_TEMPLATES(ProcSwitchRequest);
-DECLARE_MSG_TEMPLATES(ProcSwitchResponse);
+DECLARE_MSG_TEMPLATES(NodeSwitchRequest);
+DECLARE_MSG_TEMPLATES(NodeSwitchResponse);
 
 std::string parseString(const char (&src)[MAX_STRING_SIZE])
 {

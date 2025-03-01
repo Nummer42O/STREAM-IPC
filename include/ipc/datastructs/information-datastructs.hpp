@@ -24,14 +24,14 @@ struct NodeAliveUpdate
 struct NodePublishesToUpdate
 {
   primaryKey_t primaryKey;
-  MAKE_ARRAY(primaryKey_t, publishesTo);
+  primaryKey_t publishesTo;
 };
 
 #define MSG_TYPE_NODE_SUBSCRIBES_TO_UPDATE GET_COUNTER
 struct NodeSubscribesToUpdate
 {
   primaryKey_t primaryKey;
-  MAKE_ARRAY(primaryKey_t, subscribesTo);
+  primaryKey_t subscribesTo;
 };
 
 #define MSG_TYPE_NODE_SERVICES_UPDATE GET_COUNTER
@@ -42,14 +42,14 @@ struct NodeServicesUpdate
   {
     MAKE_STRING(name);
     primaryKey_t nodeId;
-  } services[MAX_ARRAY_SIZE];
+  } service;
 };
 
 #define MSG_TYPE_NODE_CLIENTS_UPDATE GET_COUNTER
 struct NodeClientsUpdate
 {
   primaryKey_t primaryKey;
-  MAKE_ARRAY(primaryKey_t, clients);
+  primaryKey_t clients;
 };
 
 #define MSG_TYPE_NODE_RESPONSE GET_COUNTER
@@ -63,10 +63,10 @@ struct NodeResponse
   uint32_t bootCount;
   pid_t pid;
 
-  NodePublishesToUpdate publishesToInitialUpdate;
-  NodeSubscribesToUpdate subscribesToInitialUpdate;
-  NodeServicesUpdate servicesInitialUpdate;
-  NodeClientsUpdate clientsInitialUpdate;
+  MAKE_ARRAY(NodePublishesToUpdate,   publishesToInitialUpdate);
+  MAKE_ARRAY(NodeSubscribesToUpdate,  subscribesToInitialUpdate);
+  MAKE_ARRAY(NodeServicesUpdate,      servicesInitialUpdate);
+  MAKE_ARRAY(NodeClientsUpdate,       clientsInitialUpdate);
 };
 
 

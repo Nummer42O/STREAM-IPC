@@ -5,13 +5,14 @@
 #include <sys/ipc.h>
 #include <sys/msg.h>
 
-#include "util.hpp"
+#include "ipc/util.hpp"
 #include "ipc/ipc-exceptions.hpp"
 
 #include "ipc/datastructs/information-datastructs.hpp"
 #include "ipc/datastructs/namespace-datastructs.hpp"
 #include "ipc/datastructs/search-datastructs.hpp"
 #include "ipc/datastructs/misc-datastructs.hpp"
+#include "ipc/datastructs/intern/intern-datastructs.hpp"
 
 
 namespace util {
@@ -117,6 +118,9 @@ DECLARE_MSG_TEMPLATES(UnsubscribeResponse);
 
 DECLARE_MSG_TEMPLATES(MsgRequest);
 DECLARE_MSG_TEMPLATES(MsgResponse);
+
+DECLARE_MSG_TEMPLATES(NodeSwitchRequest);
+DECLARE_MSG_TEMPLATES(NodeSwitchResponse);
 
 std::string parseString(const char (&src)[MAX_STRING_SIZE])
 {

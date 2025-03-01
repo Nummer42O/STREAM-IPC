@@ -8,7 +8,7 @@ namespace fs = std::filesystem;
 #include <sys/msg.h>
 
 #include "ipc/ipc-server.hpp"
-#include "util.hpp"
+#include "ipc/util.hpp"
 
 #define FN_SEND_RESPONSE(ResponseType, MsgTypeNr)               \
   bool IpcServer::send##ResponseType(                           \
@@ -88,3 +88,7 @@ FN_SEND_RESPONSE(UnsubscribeResponse, MSG_TYPE_UNSUBSCRIBE_RESPONSE);
 
 FN_RECEIVE_REQUEST(MsgRequest, MSG_TYPE_MSG_REQUEST);
 FN_SEND_RESPONSE(MsgResponse, MSG_TYPE_MSG_RESPONSE);
+
+// INTERN
+FN_RECEIVE_REQUEST(NodeSwitchRequest, MSG_TYPE_INTERN_PROC_SWITCH_REQUEST);
+FN_SEND_RESPONSE(NodeSwitchResponse, MSG_TYPE_INTERN_PROC_SWITCH_RESPONSE);

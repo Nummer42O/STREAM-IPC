@@ -10,7 +10,7 @@ namespace fs = std::filesystem;
 
 #include "ipc/ipc-client.hpp"
 #include "ipc/ipc-exceptions.hpp"
-#include "util.hpp"
+#include "ipc/util.hpp"
 
 #define FN_SEND_REQUEST(RequestType, MsgTypeNr)             \
   bool IpcClient::send##RequestType(                        \
@@ -79,3 +79,6 @@ FN_RECEIVE_RESPONSE(UnsubscribeResponse, MSG_TYPE_UNSUBSCRIBE_RESPONSE);
 
 FN_SEND_REQUEST(MsgRequest, MSG_TYPE_MSG_REQUEST);
 FN_RECEIVE_RESPONSE(MsgResponse, MSG_TYPE_MSG_RESPONSE);
+
+FN_SEND_REQUEST(NodeSwitchRequest, MSG_TYPE_INTERN_PROC_SWITCH_REQUEST);
+FN_RECEIVE_RESPONSE(NodeSwitchResponse, MSG_TYPE_INTERN_PROC_SWITCH_RESPONSE);

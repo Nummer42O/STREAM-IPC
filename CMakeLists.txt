@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 find_package(ament_cmake QUIET)
 
-add_library(ipc_lib)
+add_library(ipc_lib SHARED)
 target_include_directories(ipc_lib
   PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

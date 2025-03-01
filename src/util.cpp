@@ -5,7 +5,7 @@
 #include <sys/ipc.h>
 #include <sys/msg.h>
 
-#include "util.hpp"
+#include "ipc/util.hpp"
 #include "ipc/ipc-exceptions.hpp"
 
 #include "ipc/datastructs/information-datastructs.hpp"

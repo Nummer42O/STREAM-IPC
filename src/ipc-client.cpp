@@ -10,7 +10,7 @@ namespace fs = std::filesystem;
 
 #include "ipc/ipc-client.hpp"
 #include "ipc/ipc-exceptions.hpp"
-#include "util.hpp"
+#include "ipc/util.hpp"
 
 #define FN_SEND_REQUEST(RequestType, MsgTypeNr)             \
   bool IpcClient::send##RequestType(                        \

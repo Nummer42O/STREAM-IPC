@@ -28,10 +28,10 @@ public:
   DECLARE_RECEIVE_REQUEST(NodeRequest);
   DECLARE_SEND_RESPONSE(NodeResponse);
   DECLARE_SEND_RESPONSE(NodeAliveUpdate);
-  DECLARE_SEND_RESPONSE(NodePublishesToUpdate);
-  DECLARE_SEND_RESPONSE(NodeSubscribesToUpdate);
-  DECLARE_SEND_RESPONSE(NodeServicesUpdate);
-  DECLARE_SEND_RESPONSE(NodeClientsUpdate);
+  DECLARE_SEND_RESPONSE(NodePublishersToUpdate);
+  DECLARE_SEND_RESPONSE(NodeSubscribersToUpdate);
+  DECLARE_SEND_RESPONSE(NodeIsServerForUpdate);
+  DECLARE_SEND_RESPONSE(NodeIsClientOfUpdate);
 
   DECLARE_RECEIVE_REQUEST(TopicRequest);
   DECLARE_SEND_RESPONSE(TopicResponse);

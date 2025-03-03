@@ -23,6 +23,8 @@ class IpcClient
 {
 public:
   IpcClient(int projectId);
+  IpcClient(const IpcClient &) = delete;
+  IpcClient &operator=(const IpcClient &) = delete;
 
   DECLARE_SEND_REQUEST(NodeRequest);
   DECLARE_RECEIVE_RESPONSE(NodeResponse);

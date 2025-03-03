@@ -23,6 +23,8 @@ class IpcServer
 {
 public:
   IpcServer(int projectId);
+  IpcServer(const IpcServer &) = delete;
+  IpcServer &operator=(const IpcServer &) = delete;
   ~IpcServer();
 
   DECLARE_RECEIVE_REQUEST(NodeRequest);

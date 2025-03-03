@@ -90,10 +90,10 @@ bool receiveMsg(int msgQueueId, T &payload, long msgType, bool wait)
 DECLARE_MSG_TEMPLATES(NodeRequest);
 DECLARE_MSG_TEMPLATES(NodeResponse);
 DECLARE_MSG_TEMPLATES(NodeAliveUpdate);
-DECLARE_MSG_TEMPLATES(NodePublishesToUpdate);
-DECLARE_MSG_TEMPLATES(NodeSubscribesToUpdate);
-DECLARE_MSG_TEMPLATES(NodeServicesUpdate);
-DECLARE_MSG_TEMPLATES(NodeClientsUpdate);
+DECLARE_MSG_TEMPLATES(NodePublishersToUpdate);
+DECLARE_MSG_TEMPLATES(NodeSubscribersToUpdate);
+DECLARE_MSG_TEMPLATES(NodeIsServerForUpdate);
+DECLARE_MSG_TEMPLATES(NodeIsClientOfUpdate);
 
 DECLARE_MSG_TEMPLATES(TopicRequest);
 DECLARE_MSG_TEMPLATES(TopicResponse);

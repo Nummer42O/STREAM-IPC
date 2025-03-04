@@ -60,7 +60,6 @@ public:
   DECLARE_RECEIVE_RESPONSE(MsgResponse);
 
   DECLARE_SEND_REQUEST(NodeSwitchRequest);
-  DECLARE_RECEIVE_RESPONSE(NodeSwitchResponse);
 
 private:
   int32_t mRequestIdCounter;

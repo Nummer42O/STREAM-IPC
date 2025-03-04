@@ -14,10 +14,12 @@ namespace fs = std::filesystem;
 
 #define FN_SEND_REQUEST(RequestType, MsgTypeNr)             \
   bool IpcClient::send##RequestType(                        \
-    const RequestType &request, requestId_t &oRequestId,    \
-    bool wait)                                              \
+    const RequestType &request,                             \
+    requestId_t &oRequestId,                                \
+    bool wait                                               \
+  ) const                                                   \
   {                                                         \
-    oRequestId = ++mRequestIdCounter;                       \
+    oRequestId = ++smRequestIdCounter;                       \
     util::RequestMsg<RequestType> msg{                      \
       .key = util::makeMsgKey(MsgTypeNr),                   \
       .requestId = oRequestId,                              \
@@ -29,7 +31,9 @@ namespace fs = std::filesystem;
   }
 
 #define FN_RECEIVE_RESPONSE(ResponseType, MsgTypeNr)                      \
-  std::optional<ResponseType> IpcClient::receive##ResponseType(bool wait) \
+  std::optional<ResponseType> IpcClient::receive##ResponseType(           \
+    bool wait                                                             \
+  ) const                                                                 \
   {                                                                       \
     util::ResponseMsg<ResponseType> msg;                                  \
     msgKey_t msgKey = util::makeMsgKey(MsgTypeNr, mPid);                  \
@@ -40,9 +44,10 @@ namespace fs = std::filesystem;
   }
 
 
+requestId_t IpcClient::smRequestIdCounter = 0u;
+
 IpcClient::IpcClient(int projectId)
 {
-  mRequestIdCounter = 0;
   mMsgQueueId = util::getMsgQueueId(projectId);
   mPid = ::getpid();
 }

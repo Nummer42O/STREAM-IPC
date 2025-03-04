@@ -12,7 +12,10 @@ namespace fs = std::filesystem;
 
 #define FN_SEND_RESPONSE(ResponseType, MsgTypeNr)               \
   bool IpcServer::send##ResponseType(                           \
-    const ResponseType &response, pid_t receiverId, bool wait)  \
+    const ResponseType &response,                               \
+    pid_t receiverId,                                           \
+    bool wait                                                   \
+  ) const                                                       \
   {                                                             \
     util::ResponseMsg<ResponseType> msg{                        \
       .key = util::makeMsgKey(MsgTypeNr, receiverId),           \
@@ -24,7 +27,10 @@ namespace fs = std::filesystem;
 
 #define FN_RECEIVE_REQUEST(RequestType, MsgTypeNr)              \
   std::optional<RequestType> IpcServer::receive##RequestType(   \
-    requestId_t &oRequestId, pid_t &oSenderId, bool wait)       \
+    requestId_t &oRequestId,                                    \
+    pid_t &oSenderId,                                           \
+    bool wait                                                   \
+  ) const                                                       \
   {                                                             \
     util::RequestMsg<RequestType> msg;                          \
     msgKey_t msgKey = util::makeMsgKey(MsgTypeNr);              \

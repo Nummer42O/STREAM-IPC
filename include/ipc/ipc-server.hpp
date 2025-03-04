@@ -13,10 +13,10 @@
 #include "ipc/datastructs/intern/intern-datastructs.hpp"
 
 #define DECLARE_SEND_RESPONSE(ResponseType) \
-  bool send##ResponseType(const ResponseType &response, pid_t receiverId, bool wait = true)
+  bool send##ResponseType(const ResponseType &response, pid_t receiverId, bool wait = true) const
 
 #define DECLARE_RECEIVE_REQUEST(RequestType) \
-  std::optional<RequestType> receive##RequestType(requestId_t &oRequestId, pid_t &oSenderId, bool wait = true)
+  std::optional<RequestType> receive##RequestType(requestId_t &oRequestId, pid_t &oSenderId, bool wait = true) const
 
 
 class IpcServer

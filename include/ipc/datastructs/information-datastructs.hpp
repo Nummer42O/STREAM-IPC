@@ -82,14 +82,16 @@ struct TopicRequest
 struct TopicPublishersUpdate
 {
   primaryKey_t primaryKey;
-  MAKE_ARRAY(primaryKey_t, publishers);
+  primaryKey_t publisher;
+  bool isUpdate = true;
 };
 
 #define MSG_TYPE_TOPIC_SUBSCRIBERS_UPDATE GET_COUNTER
 struct TopicSubscribersUpdate
 {
   primaryKey_t primaryKey;
-  MAKE_ARRAY(primaryKey_t, subscribers);
+  primaryKey_t subscriber;
+  bool isUpdate = true;
 };
 
 #define MSG_TYPE_TOPIC_RESPONSE GET_COUNTER
@@ -101,8 +103,7 @@ struct TopicResponse
   sharedMemoryLocation_t sharedMemoryLocation;
   double dataFrequency;
 
-  TopicPublishersUpdate publisherInitialUpdate;
-  TopicSubscribersUpdate sublisherInitialUpdate;
+  size_t nrOfInitialUpdates;
 };
 
 struct TopicDataStreamObject
@@ -125,7 +126,8 @@ struct ProcessRequest
 struct ProcessChildrenUpdate
 {
   pid_t pid;
-  MAKE_ARRAY(pid_t, children);
+  pid_t child;
+  bool isUpdate = true;
 };
 
 #define MSG_TYPE_PROCESS_RESPONSE GET_COUNTER
@@ -136,7 +138,7 @@ struct ProcessResponse
   sharedMemoryLocation_t sharedMemoryLocation;
   double dataFrequency;
 
-  ProcessChildrenUpdate cildrenInitialUpdate;
+  size_t nrOfInitialUpdates;
 };
 
 struct ProcessDataStreamObject

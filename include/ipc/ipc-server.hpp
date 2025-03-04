@@ -61,7 +61,6 @@ public:
   DECLARE_SEND_RESPONSE(MsgResponse);
 
   DECLARE_RECEIVE_REQUEST(NodeSwitchRequest);
-  DECLARE_SEND_RESPONSE(NodeSwitchResponse);
 
 private:
   int mMsgQueueId;

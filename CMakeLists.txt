@@ -35,4 +35,10 @@ if (ament_cmake_FOUND)
   )
 
   ament_package()
+else()
+  export(
+    TARGETS ipc_lib
+    NAMESPACE ipc
+    FILE ipcConfig.cmake
+  )
 endif ()

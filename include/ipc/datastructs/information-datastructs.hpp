@@ -54,6 +54,24 @@ struct NodeIsClientOfUpdate
   bool          isUpdate = true;
 };
 
+#define MSG_TYPE_NODE_ISACTIONSERVERFOR_UPDATE GET_COUNTER
+struct NodeIsActionServerForUpdate
+{
+  primaryKey_t  primaryKey;
+  MAKE_STRING(srvName);
+  primaryKey_t  actionclientNodeId;
+  bool          isUpdate = true;
+};
+
+#define MSG_TYPE_NODE_ISACTIONCLIENTOF_UPDATE GET_COUNTER
+struct NodeIsActionClientOfUpdate
+{
+  primaryKey_t  primaryKey;
+  MAKE_STRING(srvName);
+  primaryKey_t  actionserverNodeId;
+  bool          isUpdate = true;
+};
+
 #define MSG_TYPE_NODE_RESPONSE GET_COUNTER
 struct NodeResponse
 {

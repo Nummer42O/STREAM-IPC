@@ -33,6 +33,8 @@ public:
   DECLARE_RECEIVE_RESPONSE(NodeSubscribersToUpdate);
   DECLARE_RECEIVE_RESPONSE(NodeIsServerForUpdate);
   DECLARE_RECEIVE_RESPONSE(NodeIsClientOfUpdate);
+  DECLARE_RECEIVE_RESPONSE(NodeIsActionServerForUpdate);
+  DECLARE_RECEIVE_RESPONSE(NodeIsActionClientOfUpdate);
 
   DECLARE_SEND_REQUEST(TopicRequest);
   DECLARE_RECEIVE_RESPONSE(TopicResponse);

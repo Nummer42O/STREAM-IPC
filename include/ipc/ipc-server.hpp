@@ -34,6 +34,8 @@ public:
   DECLARE_SEND_RESPONSE(NodeSubscribersToUpdate);
   DECLARE_SEND_RESPONSE(NodeIsServerForUpdate);
   DECLARE_SEND_RESPONSE(NodeIsClientOfUpdate);
+  DECLARE_SEND_RESPONSE(NodeIsActionServerForUpdate);
+  DECLARE_SEND_RESPONSE(NodeIsActionClientOfUpdate);
 
   DECLARE_RECEIVE_REQUEST(TopicRequest);
   DECLARE_SEND_RESPONSE(TopicResponse);

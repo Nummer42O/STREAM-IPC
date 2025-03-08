@@ -94,6 +94,8 @@ DECLARE_MSG_TEMPLATES(NodePublishersToUpdate);
 DECLARE_MSG_TEMPLATES(NodeSubscribersToUpdate);
 DECLARE_MSG_TEMPLATES(NodeIsServerForUpdate);
 DECLARE_MSG_TEMPLATES(NodeIsClientOfUpdate);
+DECLARE_MSG_TEMPLATES(NodeIsActionServerForUpdate);
+DECLARE_MSG_TEMPLATES(NodeIsActionClientOfUpdate);
 
 DECLARE_MSG_TEMPLATES(TopicRequest);
 DECLARE_MSG_TEMPLATES(TopicResponse);

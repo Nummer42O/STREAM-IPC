@@ -52,6 +52,18 @@ IpcClient::IpcClient(int projectId)
   mPid = ::getpid();
 }
 
+IpcClient::IpcClient(IpcClient &&ipcClient)
+{
+  mMsgQueueId = std::move(ipcClient.mMsgQueueId);
+  mPid        = std::move(ipcClient.mPid);
+}
+
+IpcClient &IpcClient::operator=(IpcClient &&ipcClient)
+{
+  mMsgQueueId = std::move(ipcClient.mMsgQueueId);
+  mPid        = std::move(ipcClient.mPid);
+  return *this;
+}
 
 FN_SEND_REQUEST(NodeRequest, MSG_TYPE_NODE_REQUEST);
 FN_RECEIVE_RESPONSE(NodeResponse, MSG_TYPE_NODE_RESPONSE);

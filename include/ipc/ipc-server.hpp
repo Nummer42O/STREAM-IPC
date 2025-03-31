@@ -23,6 +23,8 @@ class IpcServer
 {
 public:
   IpcServer(int projectId);
+  IpcServer(IpcServer &&ipcServer);
+  IpcServer &operator=(IpcServer &&ipcServer);
   IpcServer(const IpcServer &) = delete;
   IpcServer &operator=(const IpcServer &) = delete;
   ~IpcServer();

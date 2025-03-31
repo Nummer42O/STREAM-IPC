@@ -23,6 +23,8 @@ class IpcClient
 {
 public:
   IpcClient(int projectId);
+  IpcClient(IpcClient &&ipcClient);
+  IpcClient &operator=(IpcClient &&ipcClient);
   IpcClient(const IpcClient &) = delete;
   IpcClient &operator=(const IpcClient &) = delete;
 

@@ -53,6 +53,17 @@ IpcServer::IpcServer(int projectId)
   mMsgQueueId = util::getMsgQueueId(projectId, true);
 }
 
+IpcServer::IpcServer(IpcServer &&ipcServer)
+{
+  mMsgQueueId = std::move(ipcServer.mMsgQueueId);
+}
+
+IpcServer &IpcServer::operator=(IpcServer &&ipcServer)
+{
+  mMsgQueueId = std::move(ipcServer.mMsgQueueId);
+  return *this;
+}
+
 IpcServer::~IpcServer()
 {
   int status = ::msgctl(mMsgQueueId, IPC_RMID, nullptr);

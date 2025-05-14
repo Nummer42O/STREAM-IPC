@@ -21,3 +21,7 @@ using msgType_t               = int32_t;
 using primaryKey_t            = uint32_t;
 using requestId_t             = uint32_t;
 using sharedMemoryLocation_t  = uint32_t; //! TODO: needs actual type
+
+enum Attribute {
+    CPU_UTILIZATION,
+};

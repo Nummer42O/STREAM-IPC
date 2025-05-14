@@ -172,3 +172,18 @@ struct ProcessAccumulatedDataStreamObject
   pid_t pid;
   ProcessDataStreamObject normal, accumulated;
 };
+
+#define GETSINGLEATTRIBUTE_REQUEST GET_COUNTER
+struct StandardSingleAttributesRequest
+{
+  primaryKey_t primaryKey;
+  Attribute attribute;
+  bool continuous;
+};
+
+#define GETSINGLEATTRIBUTE_RESPONSE GET_COUNTER
+struct StandardSingleAttributesResponse
+{
+  primaryKey_t primaryKey;
+  double value;
+};

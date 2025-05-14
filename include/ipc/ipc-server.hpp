@@ -66,6 +66,9 @@ public:
   DECLARE_RECEIVE_REQUEST(MsgRequest);
   DECLARE_SEND_RESPONSE(MsgResponse);
 
+  DECLARE_RECEIVE_REQUEST(StandardSingleAttributesRequest);
+  DECLARE_SEND_RESPONSE(StandardSingleAttributesResponse);
+
   DECLARE_RECEIVE_REQUEST(NodeSwitchRequest);
 
 private:

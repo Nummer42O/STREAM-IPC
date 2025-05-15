@@ -176,14 +176,31 @@ struct ProcessAccumulatedDataStreamObject
 #define GETSINGLEATTRIBUTE_REQUEST GET_COUNTER
 struct StandardSingleAttributesRequest
 {
-  primaryKey_t primaryKey;
-  Attribute attribute;
-  bool continuous;
+  primaryKey_t  primaryKey;
+  Attribute     attribute;
+  bool          continuous;
 };
 
 #define GETSINGLEATTRIBUTE_RESPONSE GET_COUNTER
 struct StandardSingleAttributesResponse
 {
-  primaryKey_t primaryKey;
+  double        value;
+};
+
+#define GETAGGREGATEDATTRIBUTE_REQUEST GET_COUNTER
+struct StandardAggregatedAttributesRequest
+{
+  primaryKey_t  primaryKey_RootTree1;
+  primaryKey_t  primaryKey_RootTree2;
+  Tree          tree1;
+  Tree          tree2;
+  Attribute     attribute;
+  BinOperation  binOperation;
+  bool          continuous;
+};
+
+#define GETAGGREGATEDATTRIBUTE_RESPONSE GET_COUNTER
+struct StandardAggregatedAttributesResponse
+{
   double value;
 };

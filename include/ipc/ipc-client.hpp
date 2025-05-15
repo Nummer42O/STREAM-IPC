@@ -68,6 +68,9 @@ public:
   DECLARE_SEND_REQUEST(StandardSingleAttributesRequest);
   DECLARE_RECEIVE_RESPONSE(StandardSingleAttributesResponse);
 
+  DECLARE_SEND_REQUEST(StandardAggregatedAttributesRequest);
+  DECLARE_RECEIVE_RESPONSE(StandardAggregatedAttributesResponse);
+
   DECLARE_SEND_REQUEST(NodeSwitchRequest);
 
 private:

@@ -25,3 +25,12 @@ using sharedMemoryLocation_t  = uint32_t; //! TODO: needs actual type
 enum Attribute {
     CPU_UTILIZATION,
 };
+
+enum BinOperation {
+    DIFFERENCE,
+};
+
+enum Tree {
+    NAMESPACEDRIVEN,
+    PROCESSDRIVEN,
+};

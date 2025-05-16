@@ -217,3 +217,22 @@ struct CustomAttributesResponse
 {
   MAKE_STRING_ARRAY(queryResponse);
 };
+
+#define GETAGGREGATEDMEMBER_REQUEST GET_COUNTER
+struct AggregatedMemberRequest
+{
+  primaryKey_t  primaryKey_RootTree1;
+  primaryKey_t  primaryKey_RootTree2;
+  Tree          tree1;
+  Tree          tree2;
+  BinOperation  binOperation;
+  bool          continuous;
+};
+
+#define GETAGGREGATEDMEMBER_RESPONSE GET_COUNTER
+struct AggregatedMemberResponse
+{
+  size_t        number;
+  size_t        total;
+  primaryKey_t  primaryKey;
+};

@@ -74,6 +74,9 @@ public:
   DECLARE_SEND_REQUEST(CustomAttributesRequest);
   DECLARE_RECEIVE_RESPONSE(CustomAttributesResponse);
 
+  DECLARE_SEND_REQUEST(AggregatedMemberRequest);
+  DECLARE_RECEIVE_RESPONSE(AggregatedMemberResponse);
+
   DECLARE_SEND_REQUEST(NodeSwitchRequest);
 
 private:

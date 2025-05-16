@@ -130,6 +130,9 @@ DECLARE_MSG_TEMPLATES(StandardAggregatedAttributesResponse);
 DECLARE_MSG_TEMPLATES(CustomAttributesRequest);
 DECLARE_MSG_TEMPLATES(CustomAttributesResponse);
 
+DECLARE_MSG_TEMPLATES(AggregatedMemberRequest);
+DECLARE_MSG_TEMPLATES(AggregatedMemberResponse);
+
 DECLARE_MSG_TEMPLATES(NodeSwitchRequest);
 
 std::string parseString(const char (&src)[MAX_STRING_SIZE])

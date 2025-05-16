@@ -204,3 +204,16 @@ struct StandardAggregatedAttributesResponse
 {
   double value;
 };
+
+#define GETCUSTOMATTRIBUTE_REQUEST GET_COUNTER
+struct CustomAttributesRequest
+{
+  MAKE_STRING_ARRAY(query);
+  bool              continuous;
+};
+
+#define GETCUSTOMATTRIBUTE_RESPONSE GET_COUNTER
+struct CustomAttributesResponse
+{
+  MAKE_STRING_ARRAY(queryResponse);
+};

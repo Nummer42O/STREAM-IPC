@@ -23,11 +23,13 @@ using requestId_t             = uint32_t;
 using sharedMemoryLocation_t  = uint32_t; //! TODO: needs actual type
 
 enum Attribute {
-    CPU_UTILIZATION,
+  CPU_UTILIZATION,
 };
 
 enum BinOperation {
-    DIFFERENCE,
+  UNION,
+  INTERSECTION,
+  DIFFERENCE,
 };
 
 enum Tree {

@@ -215,7 +215,9 @@ struct CustomAttributesRequest
 #define GETCUSTOMATTRIBUTE_RESPONSE GET_COUNTER
 struct CustomAttributesResponse
 {
-  MAKE_STRING_ARRAY(queryResponse);
+  size_t        number;
+  size_t        total;
+  MAKE_STRING   (line);
 };
 
 #define GETAGGREGATEDMEMBER_REQUEST GET_COUNTER

@@ -236,3 +236,18 @@ struct AggregatedMemberResponse
   size_t        total;
   primaryKey_t  primaryKey;
 };
+
+#define GETCUSTOMMEMBER_REQUEST GET_COUNTER
+struct CustomMemberRequest
+{
+  MAKE_STRING_ARRAY(query);
+  bool              continuous;
+};
+
+#define GETCUSTOMMEMBER_RESPONSE GET_COUNTER
+struct CustomMemberResponse
+{
+  size_t        number;
+  size_t        total;
+  MAKE_STRING   (line);
+};

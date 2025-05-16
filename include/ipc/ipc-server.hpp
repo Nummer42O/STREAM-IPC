@@ -78,6 +78,9 @@ public:
   DECLARE_RECEIVE_REQUEST(AggregatedMemberRequest);
   DECLARE_SEND_RESPONSE(AggregatedMemberResponse);
 
+  DECLARE_RECEIVE_REQUEST(CustomMemberRequest);
+  DECLARE_SEND_RESPONSE(CustomMemberResponse);
+
   DECLARE_RECEIVE_REQUEST(NodeSwitchRequest);
 
 private:

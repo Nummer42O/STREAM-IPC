@@ -65,11 +65,11 @@ public:
   DECLARE_SEND_REQUEST(MsgRequest);
   DECLARE_RECEIVE_RESPONSE(MsgResponse);
 
-  DECLARE_SEND_REQUEST(StandardSingleAttributesRequest);
-  DECLARE_RECEIVE_RESPONSE(StandardSingleAttributesResponse);
+  DECLARE_SEND_REQUEST(SingleAttributesRequest);
+  DECLARE_RECEIVE_RESPONSE(SingleAttributesResponse);
 
-  DECLARE_SEND_REQUEST(StandardAggregatedAttributesRequest);
-  DECLARE_RECEIVE_RESPONSE(StandardAggregatedAttributesResponse);
+  DECLARE_SEND_REQUEST(AggregatedAttributesRequest);
+  DECLARE_RECEIVE_RESPONSE(AggregatedAttributesResponse);
 
   DECLARE_SEND_REQUEST(CustomAttributesRequest);
   DECLARE_RECEIVE_RESPONSE(CustomAttributesResponse);

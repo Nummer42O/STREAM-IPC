@@ -174,7 +174,7 @@ struct ProcessAccumulatedDataStreamObject
 };
 
 #define GETSINGLEATTRIBUTE_REQUEST GET_COUNTER
-struct StandardSingleAttributesRequest
+struct SingleAttributesRequest
 {
   primaryKey_t  primaryKey;
   Attribute     attribute;
@@ -182,13 +182,13 @@ struct StandardSingleAttributesRequest
 };
 
 #define GETSINGLEATTRIBUTE_RESPONSE GET_COUNTER
-struct StandardSingleAttributesResponse
+struct SingleAttributesResponse
 {
   double        value;
 };
 
 #define GETAGGREGATEDATTRIBUTE_REQUEST GET_COUNTER
-struct StandardAggregatedAttributesRequest
+struct AggregatedAttributesRequest
 {
   primaryKey_t  primaryKey_RootTree1;
   primaryKey_t  primaryKey_RootTree2;
@@ -200,7 +200,7 @@ struct StandardAggregatedAttributesRequest
 };
 
 #define GETAGGREGATEDATTRIBUTE_RESPONSE GET_COUNTER
-struct StandardAggregatedAttributesResponse
+struct AggregatedAttributesResponse
 {
   double value;
 };

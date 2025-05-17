@@ -121,11 +121,11 @@ DECLARE_MSG_TEMPLATES(UnsubscribeResponse);
 DECLARE_MSG_TEMPLATES(MsgRequest);
 DECLARE_MSG_TEMPLATES(MsgResponse);
 
-DECLARE_MSG_TEMPLATES(StandardSingleAttributesRequest);
-DECLARE_MSG_TEMPLATES(StandardSingleAttributesResponse);
+DECLARE_MSG_TEMPLATES(SingleAttributesRequest);
+DECLARE_MSG_TEMPLATES(SingleAttributesResponse);
 
-DECLARE_MSG_TEMPLATES(StandardAggregatedAttributesRequest);
-DECLARE_MSG_TEMPLATES(StandardAggregatedAttributesResponse);
+DECLARE_MSG_TEMPLATES(AggregatedAttributesRequest);
+DECLARE_MSG_TEMPLATES(AggregatedAttributesResponse);
 
 DECLARE_MSG_TEMPLATES(CustomAttributesRequest);
 DECLARE_MSG_TEMPLATES(CustomAttributesResponse);

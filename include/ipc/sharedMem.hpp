@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ipc/common.hpp"
+
 #include <semaphore.h>
 #include <pthread.h>
 #include <cstddef>
@@ -12,15 +14,11 @@ enum class MessageType {
     CPU, MEMORY, DISK
 };
 
-struct Header {
-    size_t numberOfMessages;
-    char attribute[64];
-};
-
 struct Value {
-    Header header;
-    size_t value;
-    MessageType type;
+    std::chrono::nanoseconds    timestamp;
+    primaryKey_t                primaryKey;
+    long double                 value;
+    MessageType                 type;
 };
 
 struct SharedBuffer {

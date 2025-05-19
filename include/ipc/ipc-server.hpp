@@ -81,6 +81,9 @@ public:
   DECLARE_RECEIVE_REQUEST(CustomMemberRequest);
   DECLARE_SEND_RESPONSE(CustomMemberResponse);
 
+  DECLARE_RECEIVE_REQUEST(SHMAddressRequest);
+  DECLARE_SEND_RESPONSE(SHMAddressResponse);
+
   DECLARE_RECEIVE_REQUEST(NodeSwitchRequest);
 
 private:

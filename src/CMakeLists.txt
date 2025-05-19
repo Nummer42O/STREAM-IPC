@@ -6,4 +6,5 @@ target_sources(ipc_lib
     ipc-exceptions.cpp
     ipc-server.cpp
     util.cpp
+    sharedMem.cpp
 )

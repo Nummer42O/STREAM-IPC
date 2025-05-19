@@ -136,6 +136,9 @@ DECLARE_MSG_TEMPLATES(AggregatedMemberResponse);
 DECLARE_MSG_TEMPLATES(CustomMemberRequest);
 DECLARE_MSG_TEMPLATES(CustomMemberResponse);
 
+DECLARE_MSG_TEMPLATES(SHMAddressRequest);
+DECLARE_MSG_TEMPLATES(SHMAddressResponse);
+
 DECLARE_MSG_TEMPLATES(NodeSwitchRequest);
 
 std::string parseString(const char (&src)[MAX_STRING_SIZE])

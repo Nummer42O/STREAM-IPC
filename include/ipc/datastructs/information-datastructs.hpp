@@ -253,3 +253,15 @@ struct CustomMemberResponse
   size_t        total;
   MAKE_STRING   (line);
 };
+
+#define GETSHMADDRESS_REQUEST GET_COUNTER
+struct SHMAddressRequest
+{
+  primaryKey_t primaryKey;
+};
+
+#define GETSHMADDRESS_RESPONSE GET_COUNTER
+struct SHMAddressResponse
+{
+  MAKE_STRING   (memAdress);
+};

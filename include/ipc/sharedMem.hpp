@@ -4,6 +4,7 @@
 
 #include <semaphore.h>
 #include <pthread.h>
+#include <chrono>
 #include <cstddef>
 
 #define MAX_MESSAGES 128

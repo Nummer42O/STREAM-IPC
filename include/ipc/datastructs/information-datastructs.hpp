@@ -177,24 +177,26 @@ struct ProcessAccumulatedDataStreamObject
 struct SingleAttributesRequest
 {
   primaryKey_t  primaryKey;
-  Attribute     attribute;
+  AttributeName attribute;
   bool          continuous;
 };
 
 #define GETSINGLEATTRIBUTE_RESPONSE GET_COUNTER
 struct SingleAttributesResponse
 {
+  requestId_t requestID;
   MAKE_STRING (memAddress);
 };
 
 #define GETAGGREGATEDATTRIBUTE_REQUEST GET_COUNTER
 struct AggregatedAttributesRequest
 {
-  primaryKey_t  primaryKey_RootTree1;
-  primaryKey_t  primaryKey_RootTree2;
-  Tree          tree1;
-  Tree          tree2;
-  Attribute     attribute;
+  struct {
+    primaryKey_t  primaryKey;
+    Tree          tree;
+  } rootedTree1, rootedTree2;
+
+  AttributeName attribute;
   BinOperation  binOperation;
   bool          continuous;
 };
@@ -202,6 +204,7 @@ struct AggregatedAttributesRequest
 #define GETAGGREGATEDATTRIBUTE_RESPONSE GET_COUNTER
 struct AggregatedAttributesResponse
 {
+  requestId_t requestID;
   MAKE_STRING (memAddress);
 };
 
@@ -215,16 +218,18 @@ struct CustomAttributesRequest
 #define GETCUSTOMATTRIBUTE_RESPONSE GET_COUNTER
 struct CustomAttributesResponse
 {
+  requestId_t requestID;
   MAKE_STRING (memAddress);
 };
 
 #define GETAGGREGATEDMEMBER_REQUEST GET_COUNTER
 struct AggregatedMemberRequest
 {
-  primaryKey_t  primaryKey_RootTree1;
-  primaryKey_t  primaryKey_RootTree2;
-  Tree          tree1;
-  Tree          tree2;
+  struct {
+    primaryKey_t  primaryKey;
+    Tree          tree;
+  } rootedTree1, rootedTree2;
+
   BinOperation  binOperation;
   bool          continuous;
 };
@@ -232,6 +237,7 @@ struct AggregatedMemberRequest
 #define GETAGGREGATEDMEMBER_RESPONSE GET_COUNTER
 struct AggregatedMemberResponse
 {
+  requestId_t requestID;
   MAKE_STRING (memAddress);
 };
 
@@ -245,6 +251,7 @@ struct CustomMemberRequest
 #define GETCUSTOMMEMBER_RESPONSE GET_COUNTER
 struct CustomMemberResponse
 {
+  requestId_t requestID;
   MAKE_STRING (memAddress);
 };
 
@@ -257,5 +264,6 @@ struct SHMAddressRequest
 #define GETSHMADDRESS_RESPONSE GET_COUNTER
 struct SHMAddressResponse
 {
+  requestId_t requestID;
   MAKE_STRING (memAddress);
 };

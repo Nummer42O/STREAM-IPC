@@ -10,24 +10,15 @@
 
 namespace sharedMem {
 
-std::string parseShmName(pid_t pid, requestId_t requestID) {
-    char address[MAX_STRING_SIZE];
-    sprintf(address, "/%d%d", pid, requestID);
-    std::string input = address;
+std::string composeShmName(pid_t pid, requestId_t requestId) {
+    std::string address = ("/" + std::to_string(pid) + std::to_string(requestId)).substr(0, MAX_STRING_SIZE);
 
-    if (input.empty() || input[0] != '/') {
+    if (address.empty() || address[0] != '/') {
         throw std::invalid_argument("Input must start with '/'");
     }
 
     std::string output = "/";
-    for (size_t i = 1; i < input.length(); ++i) {
-        char ch = input[i];
-        if (std::isdigit(ch)) {
-            output += static_cast<char>('a' + (ch - '0'));
-        } else {
-            output += ch;
-        }
-    }
+    for (size_t i = 1; i < address.length(); ++i) output += static_cast<char>('a' + (address[i] - '0'));
 
     return output;
 }
@@ -39,7 +30,7 @@ void printResponse<NumericalResponse>(const Response& response) {
         return;
     }
 
-    const NumericalResponse& nr = response.payload.numerical;
+    const NumericalResponse& nr = response.numerical;
     std::cout << "NumericalResponse:\tNumber: " << nr.number << "  Total: " << nr.total << "  Value: " << nr.value << std::endl;
 }
 
@@ -50,7 +41,7 @@ void printResponse<TextualResponse>(const Response& response) {
         return;
     }
 
-    const TextualResponse& tr = response.payload.textual;
+    const TextualResponse& tr = response.textual;
     std::cout << "TextualResponse:\tNumber: " << tr.number << "  Total: " << tr.total << "  Value: " << tr.line << std::endl;
 }
 
@@ -98,9 +89,13 @@ void SHMChannel<T>::send(const T& message) {
 }
 
 template<typename T>
-bool SHMChannel<T>::receive(T& out_message) {
-    if (sem_trywait(&buffer->sem_data_available) == -1)
-        return false;
+bool SHMChannel<T>::receive(T& out_message, bool wait) {
+    if (wait) {
+        sem_wait(&buffer->sem_data_available);
+    } else {
+        if (sem_trywait(&buffer->sem_data_available) == -1)
+            return false;
+    }
 
     pthread_mutex_lock(&buffer->mutex);
     out_message = buffer->messages[buffer->tail % MAX_MESSAGES];

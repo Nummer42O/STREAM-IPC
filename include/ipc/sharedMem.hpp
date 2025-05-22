@@ -47,18 +47,16 @@ struct TextualResponse {
     MAKE_STRING(line);
 };
 
-union Union_Response {
-    NumericalResponse   numerical;
-    TextualResponse     textual;
-};
-
 struct Response {
     Header          header;
-    Union_Response  payload;
+    union {
+        NumericalResponse   numerical;
+        TextualResponse     textual;
+    };
 };
 
 
-std::string parseShmName(pid_t pid, requestId_t requestID);
+std::string composeShmName(pid_t pid, requestId_t requestID);
 
 template<typename T>
 void printResponse(const Response& response) {
@@ -87,7 +85,7 @@ public:
     ~SHMChannel();
 
     void send(const T& message);
-    bool receive(T& out_message);
+    bool receive(T& out_message, bool wait = true);
 
 private:
     void init_shared_buffer();

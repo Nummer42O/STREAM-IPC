@@ -33,7 +33,6 @@ enum ResponseType {
 
 struct Header {
     ResponseType    type;
-    size_t          payloadSize;
 };
 
 struct NumericalResponse {

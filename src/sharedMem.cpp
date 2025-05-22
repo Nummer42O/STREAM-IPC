@@ -99,3 +99,4 @@ void SHMChannel<T>::init_shared_buffer() {
 
 template class sharedMem::SHMChannel<sharedMem::Response>;
 template class sharedMem::SHMChannel<sharedMem::InputValue>;
+template class sharedMem::SHMChannel<sharedMem::TraceMessage>;

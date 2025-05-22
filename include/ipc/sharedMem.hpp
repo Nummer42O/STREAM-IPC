@@ -16,7 +16,14 @@
 namespace sharedMem {
 
 enum class MessageType {
-    CPU, MEMORY, DISK
+    CPU,
+    MEMORY,
+    DISK,
+    NODETRACE,
+    PUBLISHERTRACE,
+    SUBSCRIBERTRACE,
+    SERVICETRACE,
+    CLIENTTRACE,
 };
 
 struct InputValue {
@@ -31,7 +38,7 @@ enum ResponseType {
     TEXTUAL,
 };
 
-struct Header {
+struct ResponseHeader {
     ResponseType    type;
 };
 
@@ -48,13 +55,55 @@ struct TextualResponse {
 };
 
 struct Response {
-    Header          header;
+    ResponseHeader          header;
     union {
         NumericalResponse   numerical;
         TextualResponse     textual;
     };
 };
 
+struct TraceHeader {
+    MessageType type;
+};
+
+struct Node {
+    MAKE_STRING (name);
+    MAKE_STRING (nspace);
+    u_int64_t    handle;
+    pid_t       pid;
+    u_int32_t   stateChangeTime;    
+};
+
+struct Publisher {
+    MAKE_STRING (topicName);
+    u_int64_t    nodeHandle;
+};
+
+struct Subscriber {
+    MAKE_STRING (topicName);
+    u_int64_t    nodeHandle;
+};
+
+struct Service {
+    MAKE_STRING (name);
+    u_int64_t    nodeHandle;
+};
+
+struct Client {
+    MAKE_STRING (srvName);
+    u_int64_t    nodeHandle;
+};
+
+union TraceMessage {
+    TraceHeader     header;
+    union {
+        Node        node;
+        Publisher   publisher;
+        Subscriber  subscriber;
+        Service     service;
+        Client      client;
+    };
+};
 
 std::string composeShmName(pid_t pid, requestId_t requestID);
 

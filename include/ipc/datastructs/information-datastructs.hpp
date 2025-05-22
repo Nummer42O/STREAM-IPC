@@ -184,7 +184,7 @@ struct SingleAttributesRequest
 #define GETSINGLEATTRIBUTE_RESPONSE GET_COUNTER
 struct SingleAttributesResponse
 {
-  double        value;
+  MAKE_STRING (memAddress);
 };
 
 #define GETAGGREGATEDATTRIBUTE_REQUEST GET_COUNTER
@@ -202,7 +202,7 @@ struct AggregatedAttributesRequest
 #define GETAGGREGATEDATTRIBUTE_RESPONSE GET_COUNTER
 struct AggregatedAttributesResponse
 {
-  double value;
+  MAKE_STRING (memAddress);
 };
 
 #define GETCUSTOMATTRIBUTE_REQUEST GET_COUNTER
@@ -215,9 +215,7 @@ struct CustomAttributesRequest
 #define GETCUSTOMATTRIBUTE_RESPONSE GET_COUNTER
 struct CustomAttributesResponse
 {
-  size_t        number;
-  size_t        total;
-  MAKE_STRING   (line);
+  MAKE_STRING (memAddress);
 };
 
 #define GETAGGREGATEDMEMBER_REQUEST GET_COUNTER
@@ -234,9 +232,7 @@ struct AggregatedMemberRequest
 #define GETAGGREGATEDMEMBER_RESPONSE GET_COUNTER
 struct AggregatedMemberResponse
 {
-  size_t        number;
-  size_t        total;
-  primaryKey_t  primaryKey;
+  MAKE_STRING (memAddress);
 };
 
 #define GETCUSTOMMEMBER_REQUEST GET_COUNTER
@@ -249,9 +245,7 @@ struct CustomMemberRequest
 #define GETCUSTOMMEMBER_RESPONSE GET_COUNTER
 struct CustomMemberResponse
 {
-  size_t        number;
-  size_t        total;
-  MAKE_STRING   (line);
+  MAKE_STRING (memAddress);
 };
 
 #define GETSHMADDRESS_REQUEST GET_COUNTER
@@ -263,5 +257,5 @@ struct SHMAddressRequest
 #define GETSHMADDRESS_RESPONSE GET_COUNTER
 struct SHMAddressResponse
 {
-  MAKE_STRING   (memAdress);
+  MAKE_STRING (memAddress);
 };

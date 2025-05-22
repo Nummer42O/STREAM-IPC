@@ -121,6 +121,24 @@ DECLARE_MSG_TEMPLATES(UnsubscribeResponse);
 DECLARE_MSG_TEMPLATES(MsgRequest);
 DECLARE_MSG_TEMPLATES(MsgResponse);
 
+DECLARE_MSG_TEMPLATES(SingleAttributesRequest);
+DECLARE_MSG_TEMPLATES(SingleAttributesResponse);
+
+DECLARE_MSG_TEMPLATES(AggregatedAttributesRequest);
+DECLARE_MSG_TEMPLATES(AggregatedAttributesResponse);
+
+DECLARE_MSG_TEMPLATES(CustomAttributesRequest);
+DECLARE_MSG_TEMPLATES(CustomAttributesResponse);
+
+DECLARE_MSG_TEMPLATES(AggregatedMemberRequest);
+DECLARE_MSG_TEMPLATES(AggregatedMemberResponse);
+
+DECLARE_MSG_TEMPLATES(CustomMemberRequest);
+DECLARE_MSG_TEMPLATES(CustomMemberResponse);
+
+DECLARE_MSG_TEMPLATES(SHMAddressRequest);
+DECLARE_MSG_TEMPLATES(SHMAddressResponse);
+
 DECLARE_MSG_TEMPLATES(NodeSwitchRequest);
 
 std::string parseString(const char (&src)[MAX_STRING_SIZE])

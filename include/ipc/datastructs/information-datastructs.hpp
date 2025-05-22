@@ -172,3 +172,98 @@ struct ProcessAccumulatedDataStreamObject
   pid_t pid;
   ProcessDataStreamObject normal, accumulated;
 };
+
+#define GETSINGLEATTRIBUTE_REQUEST GET_COUNTER
+struct SingleAttributesRequest
+{
+  primaryKey_t  primaryKey;
+  AttributeName attribute;
+  bool          continuous;
+};
+
+#define GETSINGLEATTRIBUTE_RESPONSE GET_COUNTER
+struct SingleAttributesResponse
+{
+  requestId_t requestID;
+  MAKE_STRING (memAddress);
+};
+
+#define GETAGGREGATEDATTRIBUTE_REQUEST GET_COUNTER
+struct AggregatedAttributesRequest
+{
+  struct {
+    primaryKey_t  primaryKey;
+    Tree          tree;
+  } rootedTree1, rootedTree2;
+
+  AttributeName attribute;
+  BinOperation  binOperation;
+  bool          continuous;
+};
+
+#define GETAGGREGATEDATTRIBUTE_RESPONSE GET_COUNTER
+struct AggregatedAttributesResponse
+{
+  requestId_t requestID;
+  MAKE_STRING (memAddress);
+};
+
+#define GETCUSTOMATTRIBUTE_REQUEST GET_COUNTER
+struct CustomAttributesRequest
+{
+  MAKE_STRING_ARRAY(query);
+  bool              continuous;
+};
+
+#define GETCUSTOMATTRIBUTE_RESPONSE GET_COUNTER
+struct CustomAttributesResponse
+{
+  requestId_t requestID;
+  MAKE_STRING (memAddress);
+};
+
+#define GETAGGREGATEDMEMBER_REQUEST GET_COUNTER
+struct AggregatedMemberRequest
+{
+  struct {
+    primaryKey_t  primaryKey;
+    Tree          tree;
+  } rootedTree1, rootedTree2;
+
+  BinOperation  binOperation;
+  bool          continuous;
+};
+
+#define GETAGGREGATEDMEMBER_RESPONSE GET_COUNTER
+struct AggregatedMemberResponse
+{
+  requestId_t requestID;
+  MAKE_STRING (memAddress);
+};
+
+#define GETCUSTOMMEMBER_REQUEST GET_COUNTER
+struct CustomMemberRequest
+{
+  MAKE_STRING_ARRAY(query);
+  bool              continuous;
+};
+
+#define GETCUSTOMMEMBER_RESPONSE GET_COUNTER
+struct CustomMemberResponse
+{
+  requestId_t requestID;
+  MAKE_STRING (memAddress);
+};
+
+#define GETSHMADDRESS_REQUEST GET_COUNTER
+struct SHMAddressRequest
+{
+  primaryKey_t primaryKey;
+};
+
+#define GETSHMADDRESS_RESPONSE GET_COUNTER
+struct SHMAddressResponse
+{
+  requestId_t requestID;
+  MAKE_STRING (memAddress);
+};

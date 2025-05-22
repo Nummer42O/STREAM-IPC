@@ -65,6 +65,24 @@ public:
   DECLARE_SEND_REQUEST(MsgRequest);
   DECLARE_RECEIVE_RESPONSE(MsgResponse);
 
+  DECLARE_SEND_REQUEST(SingleAttributesRequest);
+  DECLARE_RECEIVE_RESPONSE(SingleAttributesResponse);
+
+  DECLARE_SEND_REQUEST(AggregatedAttributesRequest);
+  DECLARE_RECEIVE_RESPONSE(AggregatedAttributesResponse);
+
+  DECLARE_SEND_REQUEST(CustomAttributesRequest);
+  DECLARE_RECEIVE_RESPONSE(CustomAttributesResponse);
+
+  DECLARE_SEND_REQUEST(AggregatedMemberRequest);
+  DECLARE_RECEIVE_RESPONSE(AggregatedMemberResponse);
+
+  DECLARE_SEND_REQUEST(CustomMemberRequest);
+  DECLARE_RECEIVE_RESPONSE(CustomMemberResponse);
+
+  DECLARE_SEND_REQUEST(SHMAddressRequest);
+  DECLARE_RECEIVE_RESPONSE(SHMAddressResponse);
+
   DECLARE_SEND_REQUEST(NodeSwitchRequest);
 
 private:

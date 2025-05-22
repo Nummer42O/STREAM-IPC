@@ -23,28 +23,6 @@ std::string composeShmName(pid_t pid, requestId_t requestId) {
     return output;
 }
 
-template<>
-void printResponse<NumericalResponse>(const Response& response) {
-    if (response.header.type != ResponseType::NUMERICAL) {
-        std::cerr << "Error: Response is not of type NUMERICAL\n";
-        return;
-    }
-
-    const NumericalResponse& nr = response.numerical;
-    std::cout << "NumericalResponse:\tNumber: " << nr.number << "  Total: " << nr.total << "  Value: " << nr.value << std::endl;
-}
-
-template<>
-void printResponse<TextualResponse>(const Response& response) {
-    if (response.header.type != ResponseType::TEXTUAL) {
-        std::cerr << "Error: Response is not of type TEXTUAL\n";
-        return;
-    }
-
-    const TextualResponse& tr = response.textual;
-    std::cout << "TextualResponse:\tNumber: " << tr.number << "  Total: " << tr.total << "  Value: " << tr.line << std::endl;
-}
-
 
 template<typename T>
 SHMChannel<T>::SHMChannel(const char* name, bool create)

@@ -59,16 +59,6 @@ struct Response {
 std::string composeShmName(pid_t pid, requestId_t requestID);
 
 template<typename T>
-void printResponse(const Response& response) {
-    std::cerr << "No specialization of printResponse for the requested type.\n";
-}
-template<>
-void printResponse<NumericalResponse>(const Response& response);
-template<>
-void printResponse<TextualResponse>(const Response& response);
-
-
-template<typename T>
 struct SharedBuffer {
     std::array<T, MAX_MESSAGES> messages;
     size_t head;

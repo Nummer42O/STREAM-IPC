@@ -18,7 +18,7 @@ struct NodeAliveUpdate
 {
   primaryKey_t primaryKey;
   bool alive;
-  time_t aliveChangeTime;
+  time_t stateChangeTime;
   int32_t bootCount;
   pid_t pid;
 };
@@ -95,12 +95,12 @@ struct NodeStateUpdate
 struct NodeResponse
 {
   primaryKey_t primaryKey;
-  MAKE_STRING(name);
-  MAKE_STRING(pkgName);
-  bool alive;
-  time_t aliveChangeTime;
-  uint32_t bootCount;
-  pid_t pid;
+  MAKE_STRING       (name);
+  MAKE_STRING       (pkgName);
+  sharedMem::State  state;
+  time_t            stateChangeTime;
+  uint32_t          bootCount;
+  pid_t             pid;
 
   size_t nrOfInitialUpdates;
 };

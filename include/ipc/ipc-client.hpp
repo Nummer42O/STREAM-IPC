@@ -37,6 +37,7 @@ public:
   DECLARE_RECEIVE_RESPONSE(NodeIsClientOfUpdate);
   DECLARE_RECEIVE_RESPONSE(NodeIsActionServerForUpdate);
   DECLARE_RECEIVE_RESPONSE(NodeIsActionClientOfUpdate);
+  DECLARE_RECEIVE_RESPONSE(NodeTimerToUpdate);
 
   DECLARE_SEND_REQUEST(TopicRequest);
   DECLARE_RECEIVE_RESPONSE(TopicResponse);

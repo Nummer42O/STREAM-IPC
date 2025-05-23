@@ -72,6 +72,14 @@ struct NodeIsActionClientOfUpdate
   bool          isUpdate = true;
 };
 
+#define MSG_TYPE_NODE_TIMERTO_UPDATE GET_COUNTER
+struct NodeTimerToUpdate
+{
+  primaryKey_t  primaryKey;
+  u_int32_t     frequency;
+  bool          isUpdate = true;
+};
+
 #define MSG_TYPE_NODE_RESPONSE GET_COUNTER
 struct NodeResponse
 {

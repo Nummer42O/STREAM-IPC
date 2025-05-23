@@ -16,6 +16,7 @@
 namespace sharedMem {
 
 enum class MessageType {
+    NONE,
     CPU,
     MEMORY,
     DISK,
@@ -24,6 +25,7 @@ enum class MessageType {
     SUBSCRIBERTRACE,
     SERVICETRACE,
     CLIENTTRACE,
+    TIMERTRACE,
 };
 
 struct InputValue {
@@ -64,6 +66,8 @@ struct Response {
 
 struct TraceHeader {
     MessageType type;
+
+    TraceHeader (MessageType type) { this->type = type; }
 };
 
 struct Node {
@@ -94,7 +98,12 @@ struct Client {
     u_int64_t    nodeHandle;
 };
 
-union TraceMessage {
+struct Timer {
+    u_int64_t    nodeHandle;
+    u_int32_t    frequency;
+};
+
+struct TraceMessage {
     TraceHeader     header;
     union {
         Node        node;
@@ -102,7 +111,10 @@ union TraceMessage {
         Subscriber  subscriber;
         Service     service;
         Client      client;
+        Timer       timer;
     };
+
+    TraceMessage (MessageType type) : header (type) {}
 };
 
 std::string composeShmName(pid_t pid, requestId_t requestID);

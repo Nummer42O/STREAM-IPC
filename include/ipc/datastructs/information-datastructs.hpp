@@ -88,6 +88,7 @@ struct NodeStateUpdate
 {
   primaryKey_t      primaryKey;
   sharedMem::State  state;
+  time_t            stateChangeTime;
   bool              isUpdate = true;
 };
 

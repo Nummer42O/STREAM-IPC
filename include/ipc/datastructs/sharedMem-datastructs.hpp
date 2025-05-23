@@ -113,6 +113,7 @@ enum State {
 struct LifecycleTransition {
     u_int64_t   stateMachine;
     State       state;
+    time_t      stateChangeTime;
 };
 
 struct TraceMessage {

@@ -80,6 +80,14 @@ struct NodeTimerToUpdate
   bool          isUpdate = true;
 };
 
+#define MSG_TYPE_NODE_STATE_UPDATE GET_COUNTER
+struct NodeStateUpdate
+{
+  primaryKey_t  primaryKey;
+  u_int64_t     state;  // TODO: CHANGE to according ENUM!!!
+  bool          isUpdate = true;
+};
+
 #define MSG_TYPE_NODE_RESPONSE GET_COUNTER
 struct NodeResponse
 {

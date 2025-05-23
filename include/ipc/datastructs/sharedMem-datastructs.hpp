@@ -23,10 +23,10 @@ enum class MessageType {
 };
 
 struct InputValue {
-    std::chrono::nanoseconds timestamp;
-    primaryKey_t primaryKey;
-    long double value;
-    MessageType type;
+    time_t          timestamp;
+    primaryKey_t    primaryKey;
+    double          value;
+    MessageType     type;
 };
 
 enum ResponseType {
@@ -69,7 +69,7 @@ struct Node {
     MAKE_STRING (nspace);
     u_int64_t   handle;
     pid_t       pid;
-    u_int32_t   stateChangeTime;    
+    time_t      stateChangeTime;    
 };
 
 struct Publisher {

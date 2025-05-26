@@ -75,6 +75,7 @@ struct Node {
 struct Publisher {
     MAKE_STRING (topicName);
     u_int64_t   nodeHandle;
+    u_int64_t   publisherHandle;
 };
 
 struct Subscriber {

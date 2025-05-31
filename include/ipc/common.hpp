@@ -24,6 +24,7 @@ using sharedMemoryLocation_t  = uint32_t; //! TODO: needs actual type
 
 enum AttributeName {
   CPU_UTILIZATION,
+  PUBLISHINGRATES,
 };
 
 enum BinOperation {

@@ -27,5 +27,5 @@ struct MsgRequest {
 
 #define MSG_TYPE_MSG_RESPONSE GET_COUNTER
 struct MsgResponse {
-  sharedMemoryLocation_t sharedMemPtr;
+  MAKE_STRING(shmAddress);
 };

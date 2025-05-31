@@ -34,6 +34,6 @@ enum BinOperation {
 };
 
 enum Tree {
-    NAMESPACEDRIVEN,
-    PROCESSDRIVEN,
+  NAMESPACEDRIVEN,
+  PROCESSDRIVEN,
 };

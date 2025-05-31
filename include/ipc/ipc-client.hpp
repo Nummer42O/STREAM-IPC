@@ -8,7 +8,6 @@
 #include "ipc/common.hpp"
 #include "ipc/datastructs/information-datastructs.hpp"
 #include "ipc/datastructs/misc-datastructs.hpp"
-#include "ipc/datastructs/namespace-datastructs.hpp"
 #include "ipc/datastructs/search-datastructs.hpp"
 #include "ipc/datastructs/intern/intern-datastructs.hpp"
 
@@ -30,7 +29,6 @@ public:
 
   DECLARE_SEND_REQUEST(NodeRequest);
   DECLARE_RECEIVE_RESPONSE(NodeResponse);
-  DECLARE_RECEIVE_RESPONSE(NodeAliveUpdate);
   DECLARE_RECEIVE_RESPONSE(NodePublishersToUpdate);
   DECLARE_RECEIVE_RESPONSE(NodeSubscribersToUpdate);
   DECLARE_RECEIVE_RESPONSE(NodeIsServerForUpdate);
@@ -45,16 +43,6 @@ public:
   DECLARE_RECEIVE_RESPONSE(TopicResponse);
   DECLARE_RECEIVE_RESPONSE(TopicPublishersUpdate);
   DECLARE_RECEIVE_RESPONSE(TopicSubscribersUpdate);
-  //! TODO: readTopicDataStreamObject
-
-  DECLARE_SEND_REQUEST(ProcessRequest);
-  DECLARE_RECEIVE_RESPONSE(ProcessResponse);
-  DECLARE_RECEIVE_RESPONSE(ProcessChildrenUpdate);
-  //! TODO: readProcessDataStreamObject
-  //! TODO: readProcessAccumulatedDataStreamObject
-
-  DECLARE_SEND_REQUEST(NamespaceRequest);
-  DECLARE_RECEIVE_RESPONSE(NamespaceResponse);
 
   DECLARE_SEND_REQUEST(SearchRequest);
   DECLARE_RECEIVE_RESPONSE(SearchResponse);

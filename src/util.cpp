@@ -9,7 +9,6 @@
 #include "ipc/ipc-exceptions.hpp"
 
 #include "ipc/datastructs/information-datastructs.hpp"
-#include "ipc/datastructs/namespace-datastructs.hpp"
 #include "ipc/datastructs/search-datastructs.hpp"
 #include "ipc/datastructs/misc-datastructs.hpp"
 #include "ipc/datastructs/intern/intern-datastructs.hpp"
@@ -89,7 +88,6 @@ bool receiveMsg(int msgQueueId, T &payload, long msgType, bool wait)
 
 DECLARE_MSG_TEMPLATES(NodeRequest);
 DECLARE_MSG_TEMPLATES(NodeResponse);
-DECLARE_MSG_TEMPLATES(NodeAliveUpdate);
 DECLARE_MSG_TEMPLATES(NodePublishersToUpdate);
 DECLARE_MSG_TEMPLATES(NodeSubscribersToUpdate);
 DECLARE_MSG_TEMPLATES(NodeIsServerForUpdate);
@@ -103,13 +101,6 @@ DECLARE_MSG_TEMPLATES(TopicRequest);
 DECLARE_MSG_TEMPLATES(TopicResponse);
 DECLARE_MSG_TEMPLATES(TopicPublishersUpdate);
 DECLARE_MSG_TEMPLATES(TopicSubscribersUpdate);
-
-DECLARE_MSG_TEMPLATES(ProcessRequest);
-DECLARE_MSG_TEMPLATES(ProcessResponse);
-DECLARE_MSG_TEMPLATES(ProcessChildrenUpdate);
-
-DECLARE_MSG_TEMPLATES(NamespaceRequest);
-DECLARE_MSG_TEMPLATES(NamespaceResponse);
 
 DECLARE_MSG_TEMPLATES(SearchRequest);
 DECLARE_MSG_TEMPLATES(SearchResponse);

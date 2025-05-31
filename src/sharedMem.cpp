@@ -50,6 +50,9 @@ SHMChannel<T>::SHMChannel(const char* name, bool create)
 
 template<typename T>
 SHMChannel<T>::~SHMChannel() {
+    if (!buffer)
+      return;
+
     munmap(buffer, sizeof(SharedBuffer<T>));
     close(shm_fd);
     if (created) {
@@ -59,6 +62,8 @@ SHMChannel<T>::~SHMChannel() {
 
 template<typename T>
 void SHMChannel<T>::send(const T& message) {
+    assert(buffer);
+
     sem_wait(&buffer->sem_space_available);
     pthread_mutex_lock(&buffer->mutex);
     buffer->messages[buffer->head % MAX_MESSAGES] = message;
@@ -69,6 +74,8 @@ void SHMChannel<T>::send(const T& message) {
 
 template<typename T>
 bool SHMChannel<T>::receive(T& out_message, bool wait) {
+    assert(buffer);
+
     if (wait) {
         sem_wait(&buffer->sem_data_available);
     } else {

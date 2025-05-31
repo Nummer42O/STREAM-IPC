@@ -31,6 +31,7 @@ struct SharedBuffer {
 template<typename T>
 class SHMChannel {
 public:
+    inline SHMChannel(): buffer(nullptr) {}
     SHMChannel(const char* name, bool create = false);
     ~SHMChannel();
 

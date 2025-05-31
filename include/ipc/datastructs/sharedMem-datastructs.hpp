@@ -96,6 +96,7 @@ struct Client {
 struct Timer {
     u_int64_t   nodeHandle;
     u_int32_t   frequency;
+    u_int64_t   handle;
 };
 
 struct LifecycleSMInit {
@@ -130,6 +131,7 @@ struct TraceMessage {
         LifecycleTransition lcTrans;
     };
 
+    TraceMessage() : header(MessageType::NONE) {}
     TraceMessage (MessageType type) : header (type) {}
 };
 

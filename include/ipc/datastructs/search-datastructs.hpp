@@ -8,7 +8,7 @@ struct SearchRequest {
     NODE,
     TOPIC
   } type;
-  primaryKey_t primaryKey;
+  MAKE_STRING(name);
 };
 
 #define MSG_TYPE_SEARCH_RESPONSE GET_COUNTER

@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <cstring>
 #include <iostream>
+#include <cassert>
 
 
 namespace sharedMem {

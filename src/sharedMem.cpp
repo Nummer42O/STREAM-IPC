@@ -26,14 +26,14 @@ std::string composeShmName(pid_t pid, requestId_t requestId) {
 
 
 template<typename T>
-SHMChannel<T>::SHMChannel(const char* name, bool create)
-    : shm_name(name), shm_fd(-1), buffer(nullptr), created(create)
+SHMChannel<T>::SHMChannel(std::string name, bool create)
+    : shm_name(std::move(name)), shm_fd(-1), buffer(nullptr), created(create)
 {
     if (create) {
-        shm_fd = shm_open(shm_name, O_CREAT | O_RDWR, 0666);
+        shm_fd = shm_open(shm_name.c_str(), O_CREAT | O_RDWR, 0666);
         ftruncate(shm_fd, sizeof(SharedBuffer<T>));
     } else {
-        shm_fd = shm_open(shm_name, O_RDWR, 0666);
+        shm_fd = shm_open(shm_name.c_str(), O_RDWR, 0666);
     }
 
     if (shm_fd == -1)
@@ -56,7 +56,7 @@ SHMChannel<T>::~SHMChannel() {
     munmap(buffer, sizeof(SharedBuffer<T>));
     close(shm_fd);
     if (created) {
-        shm_unlink(shm_name);
+        shm_unlink(shm_name.c_str());
     }
 }
 

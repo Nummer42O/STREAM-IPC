@@ -32,7 +32,7 @@ template<typename T>
 class SHMChannel {
 public:
     inline SHMChannel(): buffer(nullptr) {}
-    SHMChannel(const char* name, bool create = false);
+    SHMChannel(std::string name, bool create = false);
     ~SHMChannel();
 
     void send(const T& message);
@@ -41,7 +41,7 @@ public:
 private:
     void init_shared_buffer();
 
-    const char* shm_name;
+    std::string shm_name;
     int shm_fd;
     SharedBuffer<T>* buffer;
     bool created;

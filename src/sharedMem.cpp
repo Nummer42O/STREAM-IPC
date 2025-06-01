@@ -8,6 +8,7 @@
 #include <iostream>
 #include <cassert>
 
+
 namespace sharedMem {
 
 std::string composeShmName(pid_t pid, requestId_t requestId) {
@@ -28,11 +29,9 @@ SHMChannel<T>::SHMChannel(std::string name, bool create)
 {
     if (create) {
         shm_fd = shm_open(shm_name.c_str(), O_CREAT | O_RDWR, 0666);
-        if (shm_fd == -1) throw std::runtime_error("Failed to open shared memory");
         ftruncate(shm_fd, sizeof(SharedBuffer<T>));
     } else {
         shm_fd = shm_open(shm_name.c_str(), O_RDWR, 0666);
-        if (shm_fd == -1) throw std::runtime_error("Failed to open shared memory");
     }
 
     void* ptr = mmap(nullptr, sizeof(SharedBuffer<T>),

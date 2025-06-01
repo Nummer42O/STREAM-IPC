@@ -12,7 +12,7 @@
 #include <iostream>
 
 #define MAX_MESSAGES 128
-
+#define DEBUG
 
 namespace sharedMem {
 

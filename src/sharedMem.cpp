@@ -68,6 +68,11 @@ void SHMChannel<T>::send(const T& message) {
     pthread_mutex_lock(&buffer->mutex);
     buffer->messages[buffer->head % MAX_MESSAGES] = message;
     buffer->head++;
+
+    #ifdef DEBUG
+        std::cerr << "[SEND] head=" << buffer->head << " tail=" << buffer->tail << std::endl;
+    #endif
+
     pthread_mutex_unlock(&buffer->mutex);
     sem_post(&buffer->sem_data_available);
 }
@@ -86,6 +91,11 @@ bool SHMChannel<T>::receive(T& out_message, bool wait) {
     pthread_mutex_lock(&buffer->mutex);
     out_message = buffer->messages[buffer->tail % MAX_MESSAGES];
     buffer->tail++;
+
+    #ifdef DEBUG
+        std::cerr << "[RECV] head=" << buffer->head << " tail=" << buffer->tail << std::endl;
+    #endif
+
     pthread_mutex_unlock(&buffer->mutex);
     sem_post(&buffer->sem_space_available);
     return true;

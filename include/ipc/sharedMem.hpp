@@ -10,9 +10,11 @@
 #include <string>
 #include <array>
 #include <iostream>
-#include <atomic> 
+#include <atomic>
 
 #define MAX_MESSAGES 128
+
+// #define DEBUG
 
 namespace sharedMem {
 
@@ -21,8 +23,8 @@ std::string composeShmName(pid_t pid, requestId_t requestID);
 template<typename T>
 struct SharedBuffer {
     std::array<T, MAX_MESSAGES> messages;
-    std::atomic<size_t> head;
-    std::atomic<size_t> tail;
+    size_t head;
+    size_t tail;
     sem_t sem_data_available;
     sem_t sem_space_available;
     pthread_mutex_t mutex;

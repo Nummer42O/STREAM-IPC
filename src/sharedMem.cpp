@@ -12,7 +12,6 @@ namespace sharedMem {
 
 std::string composeShmName(pid_t pid, requestId_t requestId) {
     std::string address = ("/" + std::to_string(pid) + std::to_string(requestId)).substr(0, MAX_STRING_SIZE);
-
     if (address.empty() || address[0] != '/') {
         throw std::invalid_argument("Input must start with '/'");
     }
@@ -20,7 +19,6 @@ std::string composeShmName(pid_t pid, requestId_t requestId) {
     std::string output = "/";
     for (size_t i = 1; i < address.length(); ++i)
         output += static_cast<char>('a' + (address[i] - '0'));
-
     return output;
 }
 
@@ -62,8 +60,8 @@ SHMChannel<T>::~SHMChannel() {
 
 template<typename T>
 void SHMChannel<T>::init_shared_buffer() {
-    buffer->head.store(0, std::memory_order_relaxed);
-    buffer->tail.store(0, std::memory_order_relaxed);
+    buffer->head = 0;
+    buffer->tail = 0;
     sem_init(&buffer->sem_data_available, 1, 0);
     sem_init(&buffer->sem_space_available, 1, MAX_MESSAGES);
 
@@ -76,14 +74,17 @@ void SHMChannel<T>::init_shared_buffer() {
 template<typename T>
 void SHMChannel<T>::send(const T& message) {
     assert(buffer);
-
     sem_wait(&buffer->sem_space_available);
 
     pthread_mutex_lock(&buffer->mutex);
 
-    size_t head = buffer->head.load(std::memory_order_relaxed);
+    size_t head = buffer->head;
     buffer->messages[head % MAX_MESSAGES] = message;
-    buffer->head.store(head + 1, std::memory_order_release);
+    buffer->head = head + 1;
+
+#ifdef DEBUG
+    std::cerr << "[SEND] head=" << buffer->head << " tail=" << buffer->tail << std::endl;
+#endif
 
     pthread_mutex_unlock(&buffer->mutex);
 
@@ -103,9 +104,13 @@ bool SHMChannel<T>::receive(T& out_message, bool wait) {
 
     pthread_mutex_lock(&buffer->mutex);
 
-    size_t tail = buffer->tail.load(std::memory_order_relaxed);
+    size_t tail = buffer->tail;
     out_message = buffer->messages[tail % MAX_MESSAGES];
-    buffer->tail.store(tail + 1, std::memory_order_release);
+    buffer->tail = tail + 1;
+
+#ifdef DEBUG
+    std::cerr << "[RECV] head=" << buffer->head << " tail=" << buffer->tail << std::endl;
+#endif
 
     pthread_mutex_unlock(&buffer->mutex);
 
@@ -115,6 +120,7 @@ bool SHMChannel<T>::receive(T& out_message, bool wait) {
 }
 
 }
+
 
 template class sharedMem::SHMChannel<sharedMem::Response>;
 template class sharedMem::SHMChannel<sharedMem::InputValue>;

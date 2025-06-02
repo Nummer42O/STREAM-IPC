@@ -135,6 +135,7 @@ struct SingleAttributesRequest
 {
   primaryKey_t  primaryKey;
   AttributeName attribute;
+  Direction     direction;
   bool          continuous;
 };
 
@@ -154,6 +155,7 @@ struct AggregatedAttributesRequest
   } rootedTree1, rootedTree2;
 
   AttributeName attribute;
+  Direction     direction;
   BinOperation  binOperation;
   bool          continuous;
 };

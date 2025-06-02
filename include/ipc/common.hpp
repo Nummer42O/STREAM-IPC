@@ -18,9 +18,11 @@ static const uint32_t _INITIAL_COUNTER_VALUE = __COUNTER__;
 
 using msgKey_t                = __syscall_slong_t;
 using msgType_t               = int32_t;
-using primaryKey_t            = uint32_t;
 using requestId_t             = uint32_t;
-using sharedMemoryLocation_t  = uint32_t; //! TODO: needs actual type
+
+#define sharedMemoryLocation_t  = MAKE_STRING(address)
+#define primaryKey_t(fieldName) MAKE_STRING(fieldName)
+
 
 enum AttributeName {
   CPU_UTILIZATION,

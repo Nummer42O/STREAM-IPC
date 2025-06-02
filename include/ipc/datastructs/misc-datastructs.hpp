@@ -21,7 +21,7 @@ struct UnsubscribeResponse {};
 #define MSG_TYPE_MSG_REQUEST GET_COUNTER
 struct MsgRequest {
   requestId_t id;
-  primaryKey_t primaryKey;
+  primaryKey_t(primaryKey);
   double targetFrequency;
 };
 

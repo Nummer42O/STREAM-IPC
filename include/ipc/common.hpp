@@ -27,6 +27,12 @@ enum AttributeName {
   PUBLISHINGRATES,
 };
 
+enum class Direction {
+  NONE,
+  EDGEINCOMING,
+  EDGEOUTGOING,
+};
+
 enum BinOperation {
   UNION,
   INTERSECTION,

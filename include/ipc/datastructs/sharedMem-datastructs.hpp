@@ -24,7 +24,7 @@ enum class MessageType {
 
 struct InputValue {
     time_t          timestamp;
-    primaryKey_t    primaryKey;
+    primaryKey_t    (primaryKey);
     double          value;
     MessageType     type;
 };

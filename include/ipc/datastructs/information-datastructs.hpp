@@ -9,66 +9,66 @@
 #define MSG_TYPE_NODE_REQUEST GET_COUNTER
 struct NodeRequest
 {
-  primaryKey_t primaryKey;
+  primaryKey_t(primaryKey);
   bool updates;
 };
 
 #define MSG_TYPE_NODE_PUBLISHES_TO_UPDATE GET_COUNTER
 struct NodePublishersToUpdate
 {
-  primaryKey_t  primaryKey;
-  primaryKey_t  publishesTo;
+  primaryKey_t(primaryKey);
+  primaryKey_t(publishesTo);
   bool          isUpdate = true;
 };
 
 #define MSG_TYPE_NODE_SUBSCRIBES_TO_UPDATE GET_COUNTER
 struct NodeSubscribersToUpdate
 {
-  primaryKey_t  primaryKey;
-  primaryKey_t  subscribesTo;
+  primaryKey_t(primaryKey);
+  primaryKey_t(subscribesTo);
   bool          isUpdate = true;
 };
 
 #define MSG_TYPE_NODE_ISSERVERFOR_UPDATE GET_COUNTER
 struct NodeIsServerForUpdate
 {
-  primaryKey_t  primaryKey;
+  primaryKey_t(primaryKey);
   MAKE_STRING(srvName);
-  primaryKey_t  clientNodeId;
+  primaryKey_t(clientNodeId);
   bool          isUpdate = true;
 };
 
 #define MSG_TYPE_NODE_ISCLIENTOF_UPDATE GET_COUNTER
 struct NodeIsClientOfUpdate
 {
-  primaryKey_t  primaryKey;
+  primaryKey_t(primaryKey);
   MAKE_STRING(srvName);
-  primaryKey_t  serverNodeId;
+  primaryKey_t(serverNodeId);
   bool          isUpdate = true;
 };
 
 #define MSG_TYPE_NODE_ISACTIONSERVERFOR_UPDATE GET_COUNTER
 struct NodeIsActionServerForUpdate
 {
-  primaryKey_t  primaryKey;
+  primaryKey_t(primaryKey);
   MAKE_STRING(srvName);
-  primaryKey_t  actionclientNodeId;
+  primaryKey_t(actionclientNodeId);
   bool          isUpdate = true;
 };
 
 #define MSG_TYPE_NODE_ISACTIONCLIENTOF_UPDATE GET_COUNTER
 struct NodeIsActionClientOfUpdate
 {
-  primaryKey_t  primaryKey;
+  primaryKey_t(primaryKey);
   MAKE_STRING(srvName);
-  primaryKey_t  actionserverNodeId;
+  primaryKey_t(actionserverNodeId);
   bool          isUpdate = true;
 };
 
 #define MSG_TYPE_NODE_TIMERTO_UPDATE GET_COUNTER
 struct NodeTimerToUpdate
 {
-  primaryKey_t  primaryKey;
+  primaryKey_t(primaryKey);
   u_int32_t     frequency;
   bool          isUpdate = true;
 };
@@ -76,7 +76,7 @@ struct NodeTimerToUpdate
 #define MSG_TYPE_NODE_STATE_UPDATE GET_COUNTER
 struct NodeStateUpdate
 {
-  primaryKey_t      primaryKey;
+  primaryKey_t(primaryKey);
   sharedMem::State  state;
   time_t            stateChangeTime;
   bool              isUpdate = true;
@@ -85,7 +85,7 @@ struct NodeStateUpdate
 #define MSG_TYPE_NODE_RESPONSE GET_COUNTER
 struct NodeResponse
 {
-  primaryKey_t primaryKey;
+  primaryKey_t(primaryKey);
   MAKE_STRING       (name);
   MAKE_STRING       (pkgName);
   sharedMem::State  state;
@@ -100,30 +100,30 @@ struct NodeResponse
 #define MSG_TYPE_TOPIC_REQUEST GET_COUNTER
 struct TopicRequest
 {
-  primaryKey_t primaryKey;
+  primaryKey_t(primaryKey);
   bool updates;
 };
 
 #define MSG_TYPE_TOPIC_PUBLISHERS_UPDATE GET_COUNTER
 struct TopicPublishersUpdate
 {
-  primaryKey_t primaryKey;
-  primaryKey_t publisher;
+  primaryKey_t(primaryKey);
+  primaryKey_t(publisher);
   bool isUpdate = true;
 };
 
 #define MSG_TYPE_TOPIC_SUBSCRIBERS_UPDATE GET_COUNTER
 struct TopicSubscribersUpdate
 {
-  primaryKey_t primaryKey;
-  primaryKey_t subscriber;
+  primaryKey_t(primaryKey);
+  primaryKey_t(subscriber);
   bool isUpdate = true;
 };
 
 #define MSG_TYPE_TOPIC_RESPONSE GET_COUNTER
 struct TopicResponse
 {
-  primaryKey_t primaryKey;
+  primaryKey_t(primaryKey);
   MAKE_STRING(name);
   MAKE_STRING(type);
 
@@ -133,7 +133,7 @@ struct TopicResponse
 #define GETSINGLEATTRIBUTE_REQUEST GET_COUNTER
 struct SingleAttributesRequest
 {
-  primaryKey_t  primaryKey;
+  primaryKey_t(primaryKey);
   AttributeName attribute;
   Direction     direction;
   bool          continuous;
@@ -150,7 +150,7 @@ struct SingleAttributesResponse
 struct AggregatedAttributesRequest
 {
   struct {
-    primaryKey_t  primaryKey;
+    primaryKey_t(primaryKey);
     Tree          tree;
   } rootedTree1, rootedTree2;
 
@@ -185,7 +185,7 @@ struct CustomAttributesResponse
 struct AggregatedMemberRequest
 {
   struct {
-    primaryKey_t  primaryKey;
+    primaryKey_t(primaryKey);
     Tree          tree;
   } rootedTree1, rootedTree2;
 
@@ -217,7 +217,7 @@ struct CustomMemberResponse
 #define GETSHMADDRESS_REQUEST GET_COUNTER
 struct SHMAddressRequest
 {
-  primaryKey_t primaryKey;
+  primaryKey_t(primaryKey);
 };
 
 #define GETSHMADDRESS_RESPONSE GET_COUNTER

@@ -13,5 +13,5 @@ struct SearchRequest {
 
 #define MSG_TYPE_SEARCH_RESPONSE GET_COUNTER
 struct SearchResponse {
-  primaryKey_t primaryKey;
+  primaryKey_t(primaryKey);
 };

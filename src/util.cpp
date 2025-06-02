@@ -190,7 +190,6 @@ void parseArray(T(&dst)[MAX_ARRAY_SIZE], const std::vector<T> &src)
     dst[size] = 0;
 }
 
-DECLARE_PARSE_ARRAY_TEMPLATE(primaryKey_t);
 DECLARE_PARSE_ARRAY_TEMPLATE(pid_t);
 
 }

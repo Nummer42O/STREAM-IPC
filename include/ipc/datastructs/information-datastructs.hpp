@@ -18,6 +18,7 @@ struct NodePublishersToUpdate
 {
   primaryKey_t(primaryKey);
   primaryKey_t(publishesTo);
+  primaryKey_t(edge);
   bool          isUpdate = true;
 };
 
@@ -26,6 +27,7 @@ struct NodeSubscribersToUpdate
 {
   primaryKey_t(primaryKey);
   primaryKey_t(subscribesTo);
+  primaryKey_t(edge);
   bool          isUpdate = true;
 };
 
@@ -109,6 +111,7 @@ struct TopicPublishersUpdate
 {
   primaryKey_t(primaryKey);
   primaryKey_t(publisher);
+  primaryKey_t(edge);
   bool isUpdate = true;
 };
 
@@ -117,6 +120,7 @@ struct TopicSubscribersUpdate
 {
   primaryKey_t(primaryKey);
   primaryKey_t(subscriber);
+  primaryKey_t(edge);
   bool isUpdate = true;
 };
 

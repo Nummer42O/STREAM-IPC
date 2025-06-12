@@ -33,6 +33,7 @@ class SHMChannel {
 public:
     inline SHMChannel(): buffer(nullptr) {}
     SHMChannel(std::string name, bool create = false);
+    SHMChannel(SHMChannel &&other);
     ~SHMChannel();
 
     void send(const T& message);

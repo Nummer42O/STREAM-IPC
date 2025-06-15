@@ -49,7 +49,7 @@ SHMChannel<T>::SHMChannel(std::string name, bool create)
 }
 
 template<typename T>
-SHMChannel<T>::SHMChannel(SHMChannel &&other)
+SHMChannel<T>::SHMChannel(SHMChannel<T> &&other)
 {
   if (!other.buffer)
   {
@@ -64,6 +64,27 @@ SHMChannel<T>::SHMChannel(SHMChannel &&other)
 
   //! NOTE: Workaround so the destructor does not unmap the memory
   other.buffer = nullptr;
+}
+
+
+template<typename T>
+SHMChannel<T> &SHMChannel<T>::operator=(SHMChannel<T> &&other)
+{
+  if (!other.buffer)
+  {
+    this->buffer = nullptr;
+    return *this;
+  }
+
+  this->shm_name = std::move(other.shm_name);
+  this->shm_fd = other.shm_fd;
+  this->buffer = other.buffer;
+  this->created = other.created;
+
+  //! NOTE: Workaround so the destructor does not unmap the memory
+  other.buffer = nullptr;
+
+  return *this;
 }
 
 template<typename T>
